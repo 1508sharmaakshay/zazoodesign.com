@@ -1,0 +1,81 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+<article class="single_product {{ variant.id }}">
+  <figure>
+    <div class="product_thumb">
+      <a class="primary_img" href="{{ product.url | within: collection }}">
+        <img class="popup_cart_image" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      </a>
+      {%- include 'product-badge' -%}
+      <div class="action_links list_nirob">
+        <ul> 
+          {%- if settings.product_quickview_enalbe -%}
+          <li class="quick_button ">
+            <a class="quick-view" title="Quick View" data-toggle="modal" data-target="#product-window" href="javascript:void(0);" 
+               onclick="quiqview('{{ product.handle | handleize }}')"><i class="icon-eye"></i></a>
+          </li>
+          {%- endif -%} 
+        </ul>
+      </div>
+      {%- if product.description contains '[countdown]' and settings.countdown_timer_enable -%}
+      {%- assign count_down_first = product.description | split:'[/countdown]' | first -%}
+      {%- assign count_down_final = count_down_first | split:'[countdown]' | last -%}
+      <div class="product_countdown">
+        <div data-countdown="{{ count_down_final }}"></div> 
+      </div>
+      {%- endif -%}
+    </div>
+
+    <figcaption class="product_content list_content">
+      <div class="product_rating">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <h4 class="product_name"><a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      {% render 'junip-product-summary', product: product %}</h4>
+      <div class="price_box"> 
+        <span class="current_price">{{ product.price | money }}</span>
+        {% if product.compare_at_price_max > product.price %}
+        <span class="old_price">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+
+      <div class="product_desc">
+        {%- if product.description contains '[short_description]' -%} 
+        {%- assign short_description_first = product.description | split:'[/short_description]' | first -%}
+        {%- assign short_description_final = short_description_first | split:'[short_description]' | last -%}
+        {{ short_description_final }}
+        {%- else -%}
+        {{ product.description | strip_html | truncatewords: 20 | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first | split: '[countdown]' | first }}
+        {%- endif -%}
+      </div>
+      <div class="action_links list_action_right">
+        <ul>
+          {%- include 'add-to-cart-action-list-view' -%}
+          <li class="wishlist">
+            {% include 'wishlist-button-2' %}
+          </li>  
+          {%- if settings.compare_product_enalbe -%}
+          <li class="compare">
+            <a  href="javascript:void(0);"  class="compare compare_btn" data-pid="{{ product.handle  }}" title="" data-original-title="Compare"><i class="icon-sliders"></i></a>
+          </li>
+          {%- endif -%}	
+        </ul>
+      </div>
+
+    </figcaption>
+  </figure>
+</article>

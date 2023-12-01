@@ -1,0 +1,54 @@
+{% if settings.product_cart_type == 'ajax_popup_cart' %}
+<!-- modalAddToCart -->
+<div class="modal fade ajax-popup" id="modalAddToCart" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog white-modal modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-content-text">
+          
+          <div class="popup-image">
+            <img class="popupimage" src="">
+          </div>
+          
+          <div class="popup-content">
+            <h6 class="productmsg"></h6>
+            <p class="success-message"><span class="icon-check-square"></span>{{ settings.successfull_note }}</p> 
+            <div class="modal-button">
+              <a href="/cart" class="btn btn-cart">{{ settings.view_cart_button2 }}</a>
+              <a href="/checkout" class="btn btn-cart">{{ settings.checkout_button2 }}</a>
+            </div>
+          </div>
+          
+          <div class="right-popup-content">
+          	<p class="total_item"><span class="icon-shopping-bag"></span> {{ settings.total_cart_before_title }} <span class="cart_count bigcounter">{{ cart.item_count }}</span> {{ settings.total_cart_after_title }}</p>
+            <p class="cart_total"> <span class="total_price_label">{{ settings.total_price_label }} </span> <span class="shopping-cart__total">{{ cart.total_price | money }}</span></p>
+            <div class="continue_btn">
+              <a href="/collections/all"> {{ settings.continue_shopping }} </a>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-close">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pe-7s-close"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modalAddToCart -->
+{% endif %}
+<!-- modalAddToCart Error -->
+<div class="modal fade ajax-popup error-ajax-popup" id="modalAddToCartError" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog white-modal modal-md">
+    <div class="modal-content ">
+      <div class="modal-body">
+        <div class="modal-content-text">
+          <p class="error_message"></p>
+        </div>
+        <div class="modal-close">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times-circle"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

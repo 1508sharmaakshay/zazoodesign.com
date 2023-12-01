@@ -1,0 +1,57 @@
+
+{% assign itemStyle = '' %}{% if cart.item_count == 0 %}{% assign itemStyle = ' style="display:none;"' %}{% endif %}
+{% assign itemEmpty = '' %}{% if cart.item_count == 0 %}{% assign itemEmpty = ' style="display:block;"' %}{% endif %}
+
+{%- assign item_count = cart.item_count -%}
+
+<a href="/cart">
+  <i class="icon-shopping-bag"></i><span class="item_count total-pro bigcounter">{{ item_count }}</span>
+</a>
+
+<ul class="ht-dropdown cart-box-width">
+  
+  <li class="cart-empty-title" {{ itemEmpty }}>
+    <h3>{{ 'cart.general.empty' | t }}</h3>
+  </li>
+  
+  <li class="single-product-cart single-cart-item-loop" {{ itemStyle  }}>
+    {% for item in cart.items %}
+    <div class="single-cart-box">
+      <div class="cart-img">
+        <a href="{{ item.url }}"><img src="{{ item | img_url: 'small' }}" alt=""></a>
+        <span class="pro-quantity">{{ item.quantity }}x</span>
+      </div>
+      
+      <div class="cart-content">
+        <h6>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </h6>
+        <span class="cart-price">{{ item.price | money }}</span>
+      </div>      
+      <a class="del-icone" href="javascript:void(0);" onclick="Shopify.removeItem({{ item.variant.id }})">
+        <i class="fa fa-trash"></i>
+      </a>
+    </div>
+    {% endfor %}
+    
+  </li>
+  
+  <li class="single-product-cart mini-cart-action mini-cart-footer" {{ itemStyle  }}>
+    <!-- Cart Footer Inner Start -->
+    <div class="cart-footer">
+      <ul class="price-content">
+        <li>{{ 'cart.label.total' | t }}:
+          <span class="shopping-cart__total">{{ cart.total_price | money }}</span>
+        </li>
+      </ul>
+    </div>
+    <!-- Cart Footer Inner End -->        
+  </li>
+  
+  <li class="single-product-cart mini-cart-action" {{ itemStyle  }}>
+      <div class="cart-actions text-center">
+        <a class="cart-checkout" href="/checkout">{{ section.settings.checkout_title }}</a>
+      </div>    
+  </li>
+  
+</ul>

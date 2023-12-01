@@ -1,0 +1,90 @@
+<div class="login theme-default-margin">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+        <div class="login-form">
+          <div id="CustomerLoginForm">
+            {% form 'customer_login' %}
+            {{ form.errors | default_errors }}
+            <div class="form-container">
+              <div class="login-text">
+				<h3 class="login-header">{{ 'customer.login.title' | t }} </h3>
+                {%- if settings.login_sub_text != '' -%}
+                <p>{{ settings.login_sub_text }}</p>
+                {%- endif -%}
+              </div>
+              <div class="login-form-wrapper">
+
+                <div class="form-group row">
+                  <label for="email" class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-7">
+                    <input type="email" name="customer[email]" id="CustomerEmail" class="form-control {% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                  <div class="col-sm-7">
+                    {% if form.password_needed %}
+                    <input type="password" value="" name="customer[password]" id="CustomerPassword" class="form-control {% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.login.password' | t }}">
+                    {% endif %}
+
+                  </div>
+                </div>                
+
+                <div class="login-toggle-btn">
+
+                  <div class="login-details text-center mb-25">
+
+                    {% if form.password_needed %}
+                    <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
+                    {% endif %}
+                    <button type="submit" class="login-btn">{{ 'customer.login.sign_in' | t }}</button>
+                  </div>
+                  <div class="login-footer text-center">
+                    <p>{{ 'layout.customer.create_account' | t | customer_register_link }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endform %}
+          </div>
+          <div id="RecoverPasswordForm" style="display: none;">
+            {% form 'recover_customer_password' %}
+            {{ form.errors | default_errors }}
+            {% if form.posted_successfully? %}
+            {% assign resetPassword = true %}
+            {% endif %}
+            <div class="form-container">
+              <div class="login-text">
+                <h2>{{ 'customer.recover_password.title' | t }}</h2>
+                <p>{{ 'customer.recover_password.subtext' | t }}</p>
+              </div>
+              <div class="login-form-wrapper">
+                <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="{{ 'customer.recover_password.email' | t }}" autocorrect="off" autocapitalize="off">
+                <div class="login-toggle-btn">
+                  <div class="form-action-button">
+                    <button type="submit" class="login-btn">{{ 'customer.recover_password.submit' | t }}</button>
+                    <a href="#" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endform %}
+          </div>
+          {% if shop.checkout.guest_login %}
+          <div id="guest-login">
+            <div class="guest-form-container">
+              <h2>{{ 'customer.login.guest_title' | t }}</h2>
+              {% form 'guest_login' %}
+              <input type="submit" class="theme-default-button" value="{{ 'customer.login.guest_continue' | t }}">
+              {% endform %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

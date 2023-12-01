@@ -1,0 +1,376 @@
+<!--shipping area start-->
+<div class="shipping_area" id="section-{{ section.id }}">
+  <div class="{% if section.settings.container_width == 'container' %} container {% elsif section.settings.container_width == 'fluid' %} container-fluid {% endif %}">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'support_area' %}
+      <div class="col-lg-{{ block.settings.support_column_lg }} col-md-{{ block.settings.support_column_md }}">
+        <div class="single_shipping">
+          {%- if block.settings.feature_icon_type == "img_icon" -%}
+          <div class="shipping_icone">
+            <img  src="{%- if block.settings.feature_icon -%}{{ block.settings.feature_icon | img_url: 'master' }} {%- else -%} https://cdn.shopify.com/s/files/1/0275/1027/6157/files/shipping1.png?v=1589467972 {%- endif -%}">
+          </div>
+          {%- elsif block.settings.feature_icon_type == "font_icon" -%}
+          <div class="shipping_icone icon_font">
+            <i class="{{ block.settings.icon_name }}"></i>
+          </div>
+          {%- elsif block.settings.feature_icon_type == "none" -%}
+          {%- endif -%}
+
+          <div class="shipping_content">
+            <h3>{{ block.settings.support_titel }}</h3>
+            <p>{{ block.settings.support_content }}</p>
+          </div>
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>   
+  </div>
+</div>
+<!--shipping area end-->
+
+
+{% include 'section_typography' %}
+
+<style>
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'service_content_color' -%}
+  #section-{{ section.id }} .shipping_content h3 {
+    color: {{ block.settings.Service_title_color }}
+  }
+  #section-{{ section.id }} .shipping_content p {
+    color: {{ block.settings.Service_desc_color }}
+  }
+  #section-{{ section.id }} .shipping_icone.icon_font {
+    color: {{ block.settings.Service_icon_color }}
+  }
+ 
+  {% endcase %}
+  {% endfor %}
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Service Area",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Service Section"
+        },
+	    {
+          "type":  "radio",
+          "id":    "container_width",
+          "label": "Container Width",
+          "options": [
+            { "value": "container", "label": "Container" },
+            { "value": "fluid", "label": "Full Width" }
+          ],
+          "default":   "container"
+        }
+
+	],
+
+	"blocks":[
+		{
+          "type": "support_area",
+          "name": "Service Area",
+		  "settings": [
+            {
+			  "type": "header",
+			  "content": "Service"
+			},
+			{
+              "type":  "radio",
+              "id":    "feature_icon_type",
+              "label": "Icon Type",
+              "options": [
+                { "value": "img_icon", "label": "Image Icon" },
+                { "value": "font_icon", "label": "Font Icon" },
+				{ "value": "none", "label": "None" }
+              ],
+              "default":   "img_icon"
+            },
+            {
+			  "type": "image_picker",
+			  "id": "feature_icon",
+			  "label": "Icon"
+			},
+			{
+                "type": "text",
+                "id": "icon_name",
+                "label": "Icon Name",
+                "default": "ti-mobile",
+                "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons) And Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/) . FontAwesome Icon Use: fa fa-money  And Themify Icon Use: ti-mobile"
+            },
+			{
+				"type": "text",
+				"id": "support_titel",
+				"label": "Service Titel",
+				"default": "Free Delivery"
+                
+			},
+			{
+				"type": "textarea",
+				"id": "support_content",
+				"label": "Service Content",
+				"default": "Free shipping around the world for all <br> orders over $120"
+                
+			},
+			{
+			  "type": "range",
+			  "id": "support_column_lg",
+			  "min": 3,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Support Column",
+			  "unit": "/12",
+			  "default": 4
+			},
+
+			{
+			  "type": "range",
+			  "id": "support_column_md",
+			  "min": 3,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Tablate Support Column",
+			  "unit": "/12",
+			  "default": 6
+			}		
+          ]
+	   },
+	   {
+          "type": "service_content_color",
+          "name": "Service Content Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "color",
+			  "id": "Service_title_color",
+			  "label": "Service Title Color",
+			  "default": "#333"
+			},
+			{
+			  "type": "color",
+			  "id": "Service_desc_color",
+			  "label": "Service Description Color",
+			  "default": "#333"
+			},
+			{
+			  "type": "color",
+			  "id": "Service_icon_color",
+			  "label": "Service Icon Color",
+			  "default": "#333"
+			}
+          ]
+        },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Service Section",
+		  "category": "07. others",
+		  "blocks":[
+				{
+					"type": "support_area"
+				},
+				{
+					"type": "support_area"
+				},
+				{
+					"type": "support_area"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

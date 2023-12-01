@@ -1,0 +1,188 @@
+<div class="blog_page_section">
+  <div class="container">
+    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}flex-row-reverse{% endif %}">
+      {%- assign blogs_limit = section.settings.blog_limit_handle -%}
+      {%- paginate blog.articles by blogs_limit -%} 
+      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col-lg-12{% else %}col-lg-9{% endif %}">
+        <div class="blog_wrapper">
+          <div class="row">
+            {% for article in blog.articles %}
+            <div class="col-lg-{{ section.settings.blog_column }} col-md-12 col-12">
+              {% include 'blog-grid-item' %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {%- if paginate.pages > 1 -%}
+        <div class="row">
+          <div class="col-md-12">
+            {% include 'pagination' %}
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
+      {%- endpaginate -%}
+      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+      <div class="col-lg-3">
+        {% include 'blog-sidebar' %}
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+
+
+{
+  "name": "Blog Page",
+  "settings": [
+    {
+      "type": "select",
+      "id": "blog_column",
+      "label": "Post Column",
+      "options":[
+        {
+          "label": "1 Blog",
+          "value": "12"
+        },
+        {
+          "label": "2 Blogs",
+          "value": "6"
+        },
+        {
+          "label": "3 Blogs",
+          "value": "4"
+        },
+        {
+          "label": "4 Blogs",
+          "value": "3"
+        }
+      ],
+      "default": "12"
+    },
+    {
+      "type": "text",
+      "id": "blog_limit_handle",
+      "label": "Post Limit",
+      "default": "9",
+      "info": "How many posts will appear on each page"
+    },
+    {
+      "type": "header",
+      "content": "Blog Sidebar"
+    },
+    {
+      "type": "radio",
+      "id": "sidebar_handle",
+      "label": "Sidebar Position",
+      "options": [
+        {
+          "label": "Left Sidebar",
+          "value": "left_sidebar_handle"
+        },
+        {
+          "label": "Right Sidebar",
+          "value": "right_sidebar_handle"
+        },
+        {
+          "label": "Without Sidebar",
+          "value": "without_sidebar"
+        }
+      ],
+      "default": "left_sidebar_handle"
+    }
+  ],
+  "blocks":[
+    {
+      "type": "search",
+      "name": "Search",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "wedget_title",
+          "label": "Title",
+          "default": "Search"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_title",
+          "label": "Menu Title",
+          "default": "Custom Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_handle",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "recent_post",
+      "name": "Recent Post",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "recent_post_title",
+          "label": "Recent Post Title",
+          "default": "Recent Post"
+        },
+        {
+          "type": "range",
+          "id": "recent_post_limit_handle",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "label": "Post Limit",
+          "default": 3
+        }
+      ]
+    },
+    {
+      "type": "archive",
+      "name": "Archive",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "archive_title",
+          "label": "Archive Title",
+          "default": "Archive"
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Tag",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "blog_tags_title",
+          "label": "Tags Title",
+          "default": "Tags"
+        },
+        {
+          "type": "range",
+          "id": "blog_tags_list_limit_handle",
+          "min": 5,
+          "max": 20,
+          "step": 1,
+          "label": "Tag Limit",
+          "default": 10
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

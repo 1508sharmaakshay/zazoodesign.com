@@ -1,0 +1,173 @@
+<div class="sidebar shop-sidebar"> 
+  {% for block in section.blocks %}
+  {% case block.type %}
+
+  {% when 'menu' %}
+  <div class="sidebar-single sidebar-categorie mb-30 category-sub-menu">
+    {%- if block.settings.menu_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.menu_title }}</h3>
+    {%- endif -%}
+    <ul class="shop-categories">
+      {% assign menu = block.settings.menu_handle %}
+      {% for link in linklists[menu].links %}
+      {% assign childlink_handle = link.title | handle %}
+      {% if linklists[childlink_handle] and linklists[childlink_handle].links.size > 0 %}
+      <li class="has-sub {% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a>
+        <ul>
+          {% for childlink in linklists[childlink_handle].links %}
+          <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% else %}
+      <li class="{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% when 'category' %}
+  <aside class="sidebar-categorie mb-30">
+    {%- if block.settings.categories_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.categories_title }}</h3>
+    {%- endif -%}
+    <ul class="sidbar-style">
+      {% assign categories_list_limit = block.settings.categories_list_limit_hanlde %}
+      {% for c in collections limit: categories_list_limit %}
+      <li class="{% if collection and collection.handle == c.handle %}active{% endif %}"><a href="{{ c.url }}">{{ c.title }} <span>({{ c.products_count }})</span></a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+  {% when 'size' %}
+  <aside class="size mb-30">
+    {%- if block.settings.size_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.size_title }}</h3>
+    {%- endif -%}
+    <ul class="size-list sidbar-style">
+      {% assign tags = block.settings.size_picker | replace: ', ', ',' | replace: ' ,', ',' | split: ',' %}
+      {% assign size_list_limit = block.settings.size_list_limit_hanlde %}
+
+      {% for t in tags limit: size_list_limit %}
+      {% assign tag = t | strip %}
+      {%- if current_tags contains tag -%}
+      <li class="active"><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- elsif collection.all_tags contains tag -%}
+      <li><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- endif -%}
+      {% endfor %}
+    </ul>
+  </aside>  
+  {% when 'color' %}
+  <aside class="color mb-30">
+    {%- if block.settings.color_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.color_title }}</h3>
+    {%- endif -%}
+    <ul class="color-option sidbar-style">
+      {% assign tags = block.settings.color_picker | replace: ', ', ',' | replace: ' ,', ',' | split: ',' %}
+      {% assign colors_list_limit = block.settings.colors_list_limit_hanlde %}
+
+      {% for t in tags limit: colors_list_limit %}
+      {% assign tag = t | strip %}
+      {%- if current_tags contains tag -%}
+      <li class="{{ tag }} active"> <span style="background: {{ tag }} no-repeat center; background-size: initial;"></span> <a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- elsif collection.all_tags contains tag -%}
+      <li class="{{ tag }}"><span style="background: {{ tag }} no-repeat center; background-size: initial;"></span><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- endif -%}
+      {% endfor %}
+    </ul>
+  </aside>
+  {% when 'vendor' %}
+  <aside class="sidebar-categorie mb-30">
+    {%- if block.settings.vendors_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.vendors_title }}</h3>
+    {%- endif -%}
+    <ul class="sidbar-style">
+      {% assign vendors_list_limit = block.settings.vendors_list_limit_hanlde %}
+      {% for vendor in shop.vendors limit: vendors_list_limit %}
+      <li class="{% if collection.current_vendor == vendor %}active{% endif %}"><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li> 
+      {% endfor %}
+    </ul>
+  </aside>
+  {% when 'type' %}
+  <aside class="sidebar-categorie mb-30">
+    {%- if block.settings.types_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.types_title }}</h3>
+    {%- endif -%}
+    <ul class="sidbar-style">
+      {% assign types_list_limit = block.settings.types_list_limit_hanlde %}
+      {% for type in shop.types limit: types_list_limit %}
+      {%- if type != '' -%}
+      <li class="{% if collection.current_type == type %}active{% endif %}"><a href="{{ type | url_for_type }}">{{ type }}</a></li> 
+      {%- endif -%}
+      {% endfor %}
+    </ul>
+  </aside>
+  {% when 'rec_product' %}
+  {% assign collection = collections[block.settings.recommended_product] %} 
+  <!-- Recommended Product -->
+  <div class="single-widget widget-recommended-products mt-30">
+    {%- if block.settings.wedget_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.wedget_title }}</h3>
+    {%- endif -%}
+    <div class="recommended-products-slider-2 slider-navigation-2 slider-navigation-2-m0">
+       {% assign prd_limit = block.settings.pd_list_limit_hanlde %}
+      {% for product in collection.products limit: prd_limit %}
+      <div class="product-slider-col">
+        {% include 'feature-products' %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!--// Recommended Product -->  
+  {% when 'sidebar_banner' %}
+  <div class="sidebar-banner mt-30">
+    {% if block.settings.sidebar_banner_image %}
+    <a href="{{ block.settings.sidebar_banner_image_url }}">
+      <img src="{{ block.settings.sidebar_banner_image | img_url: 'large' }}" alt="{{ block.settings.sidebar_banner_image_alt }}">
+    </a>
+    {% else %}
+    <img src="https://via.placeholder.com/270x440" alt="block.settings.sidebar_banner_image_alt">
+    {% endif %}
+  </div>
+  {% when 'tag' %}
+  <aside class="sidebar-tags sidebar-categorie">
+    {%- if block.settings.tags_title != '' -%}
+    <h3 class="sidebar-title">{{ block.settings.tags_title }}</h3>
+    {%- endif -%}
+    <ul class="sidbar-style">
+      {% assign tags_list_limit = block.settings.tags_list_limit_hanlde %}
+      {% for tag in collection.tags limit: tags_list_limit %}
+      {%- if current_tags contains tag -%}
+      <li class="active"><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- else -%}
+      <li><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+      {%- endif -%}
+      {% endfor %}
+    </ul>
+  </aside>
+  {% endcase %}
+  {% endfor %}
+  
+</div>
+
+
+<script>
+  $(".sidebar-categorie li.active a, .color li.active a, .size li.active a").removeAttr("href");
+  $(".sidebar-widget li.active a").removeAttr("href");
+  $('.category-sub-menu li.has-sub > a').on('click', function () {
+    $(this).removeAttr('href');
+    var element = $(this).parent('li');
+    if (element.hasClass('open')) {
+      element.removeClass('open');
+      element.find('li').removeClass('open');
+      element.find('ul').slideUp();
+    } else {
+      element.addClass('open');
+      element.children('ul').slideDown();
+      element.siblings('li').children('ul').slideUp();
+      element.siblings('li').removeClass('open');
+      element.siblings('li').find('li').removeClass('open');
+      element.siblings('li').find('ul').slideUp();
+    }
+  }); 
+
+</script>

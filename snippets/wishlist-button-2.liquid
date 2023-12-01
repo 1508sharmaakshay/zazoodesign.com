@@ -1,0 +1,13 @@
+{% if customer %}
+<a  title="" data-original-title="Add to Wishlist" class="action-wishlist wishlist-btn wishlist" href="#" data-product-handle="{{ product.handle }}">
+  <span class="add-wishlist"><i class="icon-heart"></i></span>
+  <span class="loading-wishlist"><i class="fa fa-spinner animated rotateIn infinite"></i> </span>
+  <span class="remove-wishlist"><i class="icon-heart2"></i></span>
+</a>
+{% else %}
+<a  title="" data-original-title="Add to Wishlist" class="wishlist" href="/account/login" title="Wishlist">
+  <i class="icon-heart"></i>
+</a>
+{% endif %}
+
+

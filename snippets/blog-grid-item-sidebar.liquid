@@ -1,0 +1,37 @@
+<div class="single-blog">
+  <div class="blog-img">
+    {% if article.image %}
+    <a class="article__featured-image" href="{{ article.url }}">
+      {{ article | img_url: '1024x1024' | img_tag: article.title }}
+    </a>
+    {% endif %}
+    <div class="entry-meta">
+      <div class="entry-meta">
+        <div class="date">
+          <p>{{ article.published_at | date: "%d" }}</p>
+          <span>{{ article.published_at | date: "%m" }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="blog-content">
+    <h4>
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h4>
+    <ul class="meta-box">
+      <li class="meta-date">
+        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}"> {{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %} 
+        <span><i class="fa-calendar fa"></i> {{ date }}</span>        
+      </li>
+      <li>
+        <i class="fa  fa-commenting-o" aria-hidden="true"></i>
+       {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+      </li>
+    </ul>
+    {% if article.excerpt.size > 0 %}
+    <p>{{ article.excerpt }}</p>
+    {% else %}
+    <p>{{ article.content | strip_html | truncate: 90 }}</p>
+    {% endif %}
+  </div>
+</div>

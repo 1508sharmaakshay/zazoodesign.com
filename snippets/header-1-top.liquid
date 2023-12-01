@@ -1,0 +1,112 @@
+<!-- Header Top Start Here -->
+{% if section.settings.header_top_enable %}
+<div class="header_top">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-7">
+        {% if section.settings.welcome_text != blank %}
+        <div class="welcome-text">
+          <p>{{ section.settings.welcome_text }}</p>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-5 col-md-5">
+        <div class="language_currency text-right">
+          <ul>
+            
+            {% if section.settings.top__language_enable %}
+            <li class="top__language">
+              {% include 'gtranslate' %}
+            </li>
+            {% endif %}
+
+            {% if settings.currency_enable and section.settings.sec_currency_enable %}
+            {%- include 'currency-picker' -%}
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% comment %}
+
+
+<div id="section-{{ section.id }}"  class="header-top">
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="row">
+        <!-- Header Top Left Start -->
+        <div class="header-top-left ">
+          <ul>
+            {% if section.settings.contact_id_1 != '' %}
+            <li>
+              <a href="{{section.settings.contact_url_1}}">
+                {% if section.settings.contact_icon_1 != '' %}
+                <i class="fa fa-{{ section.settings.contact_icon_1 }}"></i> 
+                {% endif %}
+                {{ section.settings.contact_id_1 }}
+              </a>
+            </li>
+            {% endif %}
+            {% if section.settings.contact_id_2 != '' %}
+            <li>
+              <a href="{{section.settings.contact_url_2}}">
+                {% if section.settings.contact_icon_2 != '' %}
+                <i class="fa fa-{{ section.settings.contact_icon_2 }}"></i> 
+                {% endif %}
+                {{ section.settings.contact_id_2 }}</a>
+            </li>
+            {% endif %}
+            <li  class="top_social_area">
+              <ul class="social-icon top_social_area">
+                {% for block in section.blocks %}
+                <li>
+                  <a href="{{ block.settings.social_icon_url }}">
+                    <i class="fa fa-{{ block.settings.social_icon_name }}" aria-hidden="true"></i>
+                  </a>
+                </li>
+				{% endfor %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- Header Top Left End -->
+        <!-- Header Top Right Start -->
+        <div class="header-top-right ">
+          <ul>
+            {% if settings.currency_enable %}
+            {%- include 'currency-picker' -%}
+            {% endif %}
+            <li>
+              
+              <a href="#">{{ section.settings.set_menu_title }}
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <!-- Dropdown Start -->
+              <ul class="ht-dropdown">
+                {% assign account_menu = section.settings.account_menu_handle %}
+                {% for link in linklists[account_menu].links %}
+                <li>
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+				{% endfor %}
+              </ul>
+              <!-- Dropdown End -->
+              
+            </li>
+          </ul>
+        </div>
+        <!-- Header Top Right End -->
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</div>
+
+<!-- Header Top End Here -->
+
+{% endcomment %}

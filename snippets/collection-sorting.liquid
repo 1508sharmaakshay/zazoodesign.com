@@ -1,0 +1,68 @@
+<div class="shop_toolbar_wrapper">
+  <div class="shop_toolbar_btn">
+    <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button>
+    <button data-role="grid_4" type="button"  class=" btn-grid-4" data-toggle="tooltip" title="4"></button>
+    <button data-role="grid_list" type="button"  class="btn-list" data-toggle="tooltip" title="List"></button>
+  </div>
+
+  {%- if section.settings.short_by_enable -%}
+  <div class="main-toolbar-sorter clearfix">
+    <div class="toolbar-sorter d-md-flex align-items-center">
+      <label for="SortBy">{{ 'collections.sorting.title' | t }}:</label>
+      <select class="sorter wide" name="SortBy" id="SortBy">
+        <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+        <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+        <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+        <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+        <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+        <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+        <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+        <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+      </select>
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if section.settings.showing_product_counter_enable -%}
+  <div class="page_amount">
+    {%- assign paginate_checker = paginate.current_page | times: products_limit -%}
+    {%- if paginate.items > paginate_checker -%}
+    {%- assign paginate_final = paginate_checker -%}
+    {%- else -%}
+    {%- assign paginate_final = paginate.items -%}
+    {%- endif -%}
+
+    {% assign showing_title = section.settings.showing_title_handle | split: "|" %}
+    <span class="show-items">{{ showing_title | slice: 0 }} 
+      {{ paginate.current_offset | plus: 1 }} - {{ paginate_final }} 
+      {{ showing_title | slice: 1 }} 
+      {{ paginate.items }} 
+      {{ showing_title | slice: 2 }} 
+    </span>
+  </div>
+  {%- endif -%}
+</div>
+
+
+
+<script>
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  $(function() {
+    $('#SortBy')
+    .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+         .bind('change', function() {
+      Shopify.queryParams.sort_by = jQuery(this).val();
+      location.search = jQuery.param(Shopify.queryParams);
+    }
+    );
+  });
+</script>

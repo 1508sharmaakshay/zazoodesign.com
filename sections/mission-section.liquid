@@ -1,0 +1,335 @@
+{% if section.settings.mission_enable_area %}
+
+<!-- About Us Area Start -->
+<div id="section-{{ section.id }}" class="about_gallery_section">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row {% if section.settings.floating_column %} flex-row-reverse{% endif %}">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'mission_area' %}
+      <div class="col-lg-{{ block.settings.support_column_lg }} col-md-{{ block.settings.support_column_md }}">
+        <article class="single_gallery_section">
+          <figure>
+            {%- if block.settings.feature_icon_type == "img_icon" -%}
+            <div class="gallery_thumb">
+              <img  src="{%- if block.settings.feature_icon -%}{{ block.settings.feature_icon | img_url: 'master' }} {%- else -%} https://cdn.shopify.com/s/files/1/0275/1027/6157/files/shipping1.png?v=1589467972 {%- endif -%}">
+            </div>
+            {%- elsif block.settings.feature_icon_type == "font_icon" -%}
+            <div class="shipping_icone icon_font">
+              <i class="{{ block.settings.icon_name }}"></i>
+            </div>
+            {%- elsif block.settings.feature_icon_type == "none" -%}
+            {%- endif -%}
+            <figcaption class="about_gallery_content">
+              <h3>{{ block.settings.support_titel }}</h3>
+              <p>{{ block.settings.support_content }}</p>
+            </figcaption>
+          </figure>
+        </article>
+      </div>
+      {% endcase %}
+      {% endfor %} 
+    </div>
+  </div>
+</div>
+<!-- About Us Area End --> 
+
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Mission Section", 
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+    {
+      "type": "checkbox",
+      "id": "mission_enable_area",
+      "label": "Enable Section",
+	  "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width ?",
+      "default": false
+    }
+  ],
+  "blocks": [
+		{
+          "type": "mission_area",
+          "name": "Single Mission",
+		  "settings": [
+            {
+			  "type": "header",
+			  "content": "Single chose"
+			},
+			{
+              "type":  "radio",
+              "id":    "feature_icon_type",
+              "label": "Icon Type",
+              "options": [
+                { "value": "img_icon", "label": "Image Icon" },
+                { "value": "font_icon", "label": "Font Icon" },
+				{ "value": "none", "label": "None" }
+              ],
+              "default":   "img_icon"
+            },
+            {
+			  "type": "image_picker",
+			  "id": "feature_icon",
+			  "label": "Icon"
+			},
+			{
+                "type": "text",
+                "id": "icon_name",
+                "label": "Icon Name",
+                "default": "ti-mobile",
+                "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons) And Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/) . FontAwesome Icon Use: fa fa-money  And Themify Icon Use: ti-mobile"
+            },
+			{
+				"type": "text",
+				"id": "support_titel",
+				"label": "Service Titel",
+				"default": "Free Delivery"
+                
+			},
+			{
+				"type": "textarea",
+				"id": "support_content",
+				"label": "Service Content",
+				"default": "Free shipping around the world for all <br> orders over $120"
+                
+			},
+			{
+			  "type": "range",
+			  "id": "support_column_lg",
+			  "min": 3,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Support Column",
+			  "unit": "/12",
+			  "default": 4
+			},
+
+			{
+			  "type": "range",
+			  "id": "support_column_md",
+			  "min": 3,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Tablate Support Column",
+			  "unit": "/12",
+			  "default": 6
+			}		
+          ]
+	   },
+       {
+          "type": "section_margin",
+          "name": "Section Margin",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_padding",
+          "name": "Section Padding",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_background",
+          "name": "Section Background",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "section_bg_image",
+              "label": "BG Image"
+            },
+            {
+              "type": "color",
+              "id": "section_bg_color",
+              "label": "BG Color",
+              "default": "#ffffff"
+            }
+          ]
+       }
+  ],
+	"presets": [
+		{
+		  "name": "Mission Section",
+		  "category": "07. others",
+		  "blocks":[
+				{
+					"type": "mission_area"
+				},
+				{
+					"type": "mission_area"
+				},
+				{
+					"type": "mission_area"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% include 'section_typography' %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

@@ -1,0 +1,24 @@
+<!-- BREADCRUMBS SETCTION START -->
+{% if settings.breadcrumb_banner_enable %}
+<div class="breadcrumbs-section">
+  <div class="breadcrumbs overlay-bg" style="{% if collection.image %}background:url({{ collection.image.src | collection_img_url: 'master' }});background-position:center;background-repeat:no-repeat;background-size:cover;{% endif %}">
+    {% if template contains 'collection' or template contains 'product' %}
+    <div class="overlays"></div>
+    {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div class="breadcrumbs-inner">
+            {% if settings.breadcrub_page_title_enable %}
+            <h1 class="breadcrumbs-title">{{ page_title }}</h1> 
+            {% endif %}
+            
+            {% include 'breadcrumb-builtin' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- BREADCRUMBS SETCTION END -->

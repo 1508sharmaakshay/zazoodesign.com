@@ -1,0 +1,240 @@
+<!-- PRODUCT SECTION START -->
+{% assign related_product_limit_count = section.settings.related_product_limit_handle %}
+{% assign related_product_limit = related_product_limit_count | plus: 1 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign product_found = false %}
+
+{% for c in product.collections %}
+{% if product_found == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+{% assign product_found = true %}
+{% assign collection = c %}
+{% endif %}
+{% endfor %}
+
+{% endif %}
+
+<!-- PRODUCT SECTION END -->
+
+{% if collection and collection.products_count > 1 and section.settings.related_products_enable %}
+<div class="related_product  new-arrival no-border-style" id="section-{{ section.id }}">
+  <div class="container">
+    <!-- Section Title Start -->
+    {%- if section.settings.section_title_enable -%}
+    <div class="section-title section-title--one {% if section.settings.text_align == "left" %}text-left {% elsif section.settings.text_align == "right" %} text-right {% elsif section.settings.text_align == "center" %} text-center {% endif %}">
+      {% if section.settings.section_title != blank %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+      {% if section.settings.section_title_paragraph != blank %}
+      <p class="subtitle">{{ section.settings.section_title_paragraph }}</p>
+      {% endif %}
+    </div>
+    {%- endif -%}
+    <!-- Section Title End -->
+    
+    <div class="releted-pro-active owl-carousel">
+      
+      {% assign current_product = product %}
+      {% assign current_product_count = false %}
+      {% for product in collection.products limit: related_product_limit %}
+      {% if product.handle == current_product.handle %}
+      {% assign current_product_count = false %}
+      {% else %}
+      {% unless current_product_count == true and forloop.last %}      
+      
+      <!-- Single Product Start Here -->
+      {% include 'product-grid-item' %}
+      <!-- Single Product End Here -->
+      
+      {% endunless %}
+      {% endif %}     
+      {% endfor %}      
+      
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Related Product",
+    "settings": [
+		{
+            "type": "checkbox",
+            "id": "related_products_enable",
+            "label": "Show Related Product",
+            "default": true
+        },
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_title_enable",
+          "label": "Section Title Enable",
+		  "default": true
+        }, 
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title Label",
+		  "default": "Section Title"
+        },
+		{
+          "type": "textarea",
+          "id": "section_title_paragraph",
+          "label": "Section Title Description",
+		  "default": "Section Title Description"
+        },
+		{
+          "type": "image_picker",
+          "id": "section_title_divder_img",
+          "label": "Title Divider Image"
+      	},
+		{
+          "type":  "radio",
+          "id":    "text_align",
+          "label": "Section Title Align",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" },
+			 { "value": "center", "label": "Center" }
+          ],
+          "default":   "center"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Style"
+        },
+        {
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#323232"
+        },
+        {
+          "type": "color",
+          "id": "section_desc_color",
+          "label": "Section Description Color",
+          "default": "#323232"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Margin And Padding Bottom"
+        },
+        {
+          "type": "range",
+          "id": "section_title_margin_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Margin Bottom",
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "section_title_padding_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Padding Bottom",
+          "unit": "px",
+          "default": 40
+        },
+		{
+            "type": "header",
+            "content": "Product Options"
+        },
+		{
+          "type": "select",
+          "id": "product_column",
+          "label": "Produc Column",
+		  "options":[
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				},
+				{
+					"label": "4 Products",
+					"value": "4"
+				}
+			],
+			"default": "4"
+      	},
+		{
+            "type": "text",
+            "id": "related_product_limit_handle",
+            "label": "Product Limit",
+			"default": "10"
+      	}
+	]
+  }
+{% endschema %}
+
+
+
+<style>
+  #section-{{ section.id }} .section-title h2 {
+  	color: {{ section.settings.section_title_color }};
+  }
+  #section-{{ section.id }} .section-title p {
+  	color: {{ section.settings.section_desc_color }};
+  }
+  {% if section.settings.section_title_divder_img %}
+  	#section-{{ section.id }}   .section-title {
+   		 background: rgba(0, 0, 0, 0) url("{{ section.settings.section_title_divder_img | img_url: 'master' }}") no-repeat scroll 50% 100%;
+    }
+  {% else %}
+  #section-{{ section.id }}  .section-title {
+    background: none;
+  }
+  {% endif %}
+  
+  #section-{{ section.id }}  .section-title {
+    padding-bottom:{{ section.settings.section_title_margin_bottom }}px;
+  }
+  #section-{{ section.id }}  .section-title {
+    margin-bottom: {{ section.settings.section_title_padding_bottom }}px;
+  }
+  
+</style>
+
+<script>
+    $('.releted-pro-active').owlCarousel({
+        loop: true,
+        nav: true,
+        {% if settings.rtl_enable %}                
+        rtl: true,
+        {% endif %}
+        dots: false,
+        smartSpeed: 1500,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 20,
+        responsive: {
+            0: {
+                items: 1,
+                autoplay: true,
+                smartSpeed: 500
+            },
+            480: {
+                items: 2
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: {{ section.settings.product_column }}
+            },
+            1200: {
+              items: {{ section.settings.product_column }}
+            }
+        }
+    });
+</script>  

@@ -1,0 +1,257 @@
+<!-- Contact page content -->
+<div class="contact-page-area ">
+  {% if section.settings.map_enable %}
+  <!-- contact page map -->
+  <div class="contact-page-map">
+    <!-- Google Map Start -->
+    <div class="container-fluid">
+
+      {% include 'contact-map' %}
+
+    </div>
+    <!-- Google Map End -->
+  </div>
+  <!-- contact page map -->
+  {% endif %}
+  <!-- contact form area -->
+  <div class="contact-form-area contact_message  pt-100 pb-65">
+    <div class="container-fluid">
+      <div class="row">
+        {% if section.settings.contact_form_enable %}
+        <div class="{% if section.settings.contact_information_enable %}col-lg-6{% else %}col-lg-6 offset-md-3{% endif %} col-12">
+          <div class="contact-form-inner">
+            {% if section.settings.form_title != '' %}
+            <h2 class="contact__title">{{ section.settings.form_title }}</h2>
+            {% endif %}
+
+            {% include 'contact-form' %}
+
+          </div>
+        </div>
+        {% endif %}
+
+
+        {% if section.settings.contact_information_enable %}
+        <div class="{% if section.settings.contact_form_enable %}col-lg-6 {% else %} col-lg-6 offset-md-3{% endif %} col-12">
+
+          {% include 'contact-information' %}
+
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <!-- contact form area end -->
+</div>
+<!-- Contact page content end -->
+
+
+
+
+{% if section.settings.map_margin_bottom_enable %}
+<style>
+  .google__map{
+  	margin-bottom: 130px;
+  }
+  @media (max-width: 767px) {
+    .google__map{
+      margin-bottom: 70px;
+    }
+  }
+</style>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Contact Template",
+    "settings": [
+		  {
+              "type": "header",
+              "content": "Contact Form"
+          },
+          {
+              "type": "checkbox",
+              "id": "contact_form_enable",
+              "label": "Show Contact Form",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "form_title",
+              "label": "Form Title",
+              "default": "Get in touch"
+          },
+          {
+              "type": "text",
+              "id": "name_placeholder",
+              "label": "Input fild Name",
+              "default": "Your name *"
+          },
+          {
+              "type": "text",
+              "id": "email_placeholder",
+              "label": "Input fild Email",
+              "default": "Your email *"
+          },
+		  {
+              "type": "text",
+              "id": "subject_placeholder",
+              "label": "Input fild Subject",
+              "default": "Subject"
+          },
+          {
+              "type": "text",
+              "id": "message_placeholder",
+              "label": "Input fild Message",
+              "default": "Type your message here.."
+          },
+          {
+              "type": "text",
+              "id": "form_button_name",
+              "label": "Form Button Name",
+              "default": "Send Email"
+          },
+		  {
+              "type": "header",
+              "content": "Contact Information Area"
+          },
+          {
+              "type": "checkbox",
+              "id": "contact_information_enable",
+              "label": "Show Contact Information",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "contact_info_title",
+              "label": "Contact Info Title",
+              "default": "Get office info"
+          },
+		  {
+              "type": "textarea",
+              "id": "contact_info_content",
+              "label": "Contact Info Content",
+              "default": "Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima."
+          },
+		  {
+              "type": "header",
+              "content": "Address"
+          },
+		  {
+              "type": "checkbox",
+              "id": "address_field_enable",
+              "label": "Show Address Field",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "address_title",
+              "label": "Address Title",
+              "default": "Address"
+          },
+		  {
+              "type": "textarea",
+              "id": "address_content",
+              "label": "Address Content",
+              "default": "666 5th Ave New York, NY, United"
+          },
+		  {
+              "type": "header",
+              "content": "Phone Number"
+          },
+		  {
+              "type": "checkbox",
+              "id": "phone_field_enable",
+              "label": "Show Phone Field",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "phone_number_title",
+              "label": "Phone Number Title",
+              "default": "Phone Number"
+          },
+		  {
+              "type": "textarea",
+              "id": "phone_number_content",
+              "label": "Phone Number Content",
+              "default": "716-298-1822"
+          },
+		  {
+              "type": "header",
+              "content": "Email"
+          },
+		  {
+              "type": "checkbox",
+              "id": "email_field_enable",
+              "label": "Show Email Field",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "email_title",
+              "label": "Email Title",
+              "default": "Email Address"
+          },
+		  {
+              "type": "textarea",
+              "id": "email_content",
+              "label": "Email Content",
+              "default": "info@example.com"
+          },
+		  {
+              "type": "header",
+              "content": "Map"
+          },
+          {
+              "type": "checkbox",
+              "id": "map_enable",
+              "label": "Show Map",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "latitude",
+              "label": "Your Adderss Latititude",
+              "default": "47.606205"
+          },
+          {
+              "type": "text",
+              "id": "languid",
+              "label": "Your Adderss Languid",
+              "default": "-122.332046"
+          },
+		  {
+              "type": "image_picker",
+              "id": "map_icon_image",
+              "label": "Map Marker Image"
+          },
+		  {
+              "type": "checkbox",
+              "id": "icon_animation_enable",
+              "label": "Map Marker Animation Enable",
+			  "default": true
+          },
+		  {
+              "type": "text",
+              "id": "google_map_api_key",
+              "label": "Google Map API Key",
+              "default": "AIzaSyCBEypW1XtGLWpikFPcityAok8rhJzzWRw"
+          },
+		  {
+              "type": "checkbox",
+              "id": "map_margin_bottom_enable",
+              "label": "Margin Bottom Enable",
+              "default": false
+          }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

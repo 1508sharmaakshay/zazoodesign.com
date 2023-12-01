@@ -1,0 +1,500 @@
+<!--testimonial area start-->
+<div id="section-{{ section.id }}" class="testimonial_area">
+  <div class="{% if section.settings.container_width == 'container' %} container {% elsif section.settings.container_width == 'fluid' %} container-fluid {% endif %}">
+    <div class="row">
+      <div class="col-12">
+        {%- if section.settings.section_title_enable -%}
+        <div class="section_title {% if section.settings.text_align == "left" %}text-left {% elsif section.settings.text_align == "right" %} text-right {% elsif section.settings.text_align == "center" %} text-center {% endif %}">
+          {% if section.settings.section_title != blank %}
+          <h2>{{ section.settings.section_title }}</h2>
+          {% endif %}
+          {% if section.settings.section_title_paragraph != blank %}
+          <p class="subtitle">{{ section.settings.section_title_paragraph }}</p>
+          {% endif %}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="testimonial_container">
+      <div class="row">
+        <div class="testimonial_carousel owl-carousel">
+          {% for block in section.blocks %}
+          {% case block.type %}
+          {% when 'testmonial' %}
+          <div class="col-12">
+            <div class="single-testimonial">
+              <div class="testimonial_content">
+                {% if block.settings.tmonial_content !=blank %}
+                <p style = "color: {{ block.settings.tmonial_content_color }}">{{ block.settings.tmonial_content }}</p>
+                {% endif %}
+                <div class="testimonial_text_img">
+                  {% if block.settings.tmonial_image %}
+                  <img   src="{{ block.settings.tmonial_image | img_url: '100x100' }}" alt="{{ block.settings.tmonial_image.alt }}">
+                  {% else %}
+                  <img   src="https://via.placeholder.com/100x100" alt="block.settings.image_test.alt">
+                  {% endif %}
+                </div>
+                {% if block.settings.tmonial_author !=blank %}
+                <div class="testimonial_author">
+                  <p style = "color: {{ block.settings.tmonial_author_color }}">{{ block.settings.tmonial_author }} / <span  style = "color: {{ block.settings.tmonial_author_designation_color }}" >{{ block.settings.tmonial_author_designation }}</span></p>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--testimonial area end-->
+
+{% include 'section_typography' %}
+<style>
+  #section-{{ section.id }} .section_title h2 {
+    color: {{ section.settings.section_title_color }};
+  }
+  #section-{{ section.id }} .section_title p {
+    color: {{ section.settings.section_desc_color }};
+  }
+  #section-{{ section.id }} .section_title::before{
+    background: {{ section.settings.section_border_color }};
+  }
+
+  #section-{{ section.id }}  .section_title {
+    padding-bottom:{{ section.settings.section_title_margin_bottom }}px;
+  }
+  #section-{{ section.id }}  .section_title {
+    margin-bottom: {{ section.settings.section_title_padding_bottom }}px;
+  }
+
+  {% if  section.settings.slider_arrow_enable %}
+  #section-{{ section.id }}.testmonial .owl-nav {
+    display: none;
+  }
+  {% endif %}
+
+  #section-{{ section.id }} .testimonial_carousel  .owl-nav div {
+    background: {{ section.settings.rev_arrow_bg_color  }};
+    color: {{ section.settings.rev_arrow_text_color  }};
+  }
+  #section-{{ section.id }} .testimonial_carousel  .owl-nav div:hover {
+    background: {{ section.settings.rev_arrow_bg_color_on_hover  }};
+    color: {{ section.settings.rev_arrow_text_color_on_hover  }};
+  }
+</style>
+
+
+<script>
+  /*---testimonial carousel activation---*/
+  $('#section-{{ section.id }} .testimonial_carousel').owlCarousel({
+    autoplay: true,
+    {% if settings.rtl_enable %}                
+    rtl: true,
+    {% endif %}
+    loop: true,
+    nav: true,
+    autoplay: false,
+    autoplayTimeout: 8000,
+    items: 1,
+    dots:false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    });
+</script>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Testmonial",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Testmonial"
+        },
+	    {
+          "type":  "radio",
+          "id":    "container_width",
+          "label": "Container Width",
+          "options": [
+            { "value": "container", "label": "Container" },
+            { "value": "fluid", "label": "Full Width" }
+          ],
+          "default":   "container"
+        },
+		{
+          "type": "header",
+          "content": "Section Title"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_title_enable",
+          "label": "Section Title Enable",
+		  "default": true
+        }, 
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title Label",
+		  "default": "What Our Customers Says ?"
+        },
+		{
+          "type": "textarea",
+          "id": "section_title_paragraph",
+          "label": "Section Title Description"
+        },
+		{
+          "type":  "radio",
+          "id":    "text_align",
+          "label": "Section Title Align",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" },
+			 { "value": "center", "label": "Center" }
+          ],
+          "default":   "center"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Style"
+        },
+        {
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#323232"
+        },
+        {
+          "type": "color",
+          "id": "section_desc_color",
+          "label": "Section Description Color",
+          "default": "#323232"
+        },
+        {
+          "type": "color",
+          "id": "section_border_color",
+          "label": "Section Border Color",
+          "default": "#222"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Margin And Padding Bottom"
+        },
+        {
+          "type": "range",
+          "id": "section_title_margin_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Margin Bottom",
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "section_title_padding_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Padding Bottom",
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "Carousel Settings"
+        },
+        {
+          "type": "paragraph",
+          "content": "Product Slider Arrow Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_arrow_enable",
+          "default": false,
+          "label": "Slider Arrow Disable"
+        },
+        {
+          "type": "color",
+          "id": "rev_arrow_bg_color",
+          "label": "Arrow Bg Color",
+          "default": "rgba(0,0,0,0)"	
+        },
+        {
+          "type": "color",
+          "id": "rev_arrow_text_color",
+          "label": "Arrow Text Color",
+          "default": "#222"	
+        },
+        {
+          "type": "color",
+          "id": "rev_arrow_bg_color_on_hover",
+          "label": "Arrow Bg Color On Hover",
+          "default": "rgba(0,0,0,0)"	
+        },
+        {
+          "type": "color",
+          "id": "rev_arrow_text_color_on_hover",
+          "label": "Arrow Text Color Hover",
+          "default": "#79a206"	
+        }
+	],
+
+	"blocks":[
+		{
+          "type": "testmonial",
+          "name": "testmonial",
+		  "limit": 4,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Testmonial"
+			},
+            {
+              "type": "textarea",
+              "id": "tmonial_content",
+              "label": "Testmonial Content:",
+              "default": "Extra peedling, an effective and excellent formulation of fresh fruit-natural pear and vitamin C. Click to Shop Now or Check something else"
+            },
+            {
+              "type": "color",
+              "id": "tmonial_content_color",
+              "label": "Testmonial Content Color:",
+              "default": "#222"
+            },
+			{
+			  "type": "image_picker",
+              "id": "tmonial_image",
+              "label": "Testmonial Image:",
+			  "info": "Image Size: 100px x 100px"
+			},
+            {
+              "type": "text",
+              "id": "tmonial_author",
+              "label": "Author Text:",
+              "default": "Author Name"
+            },
+            {
+              "type": "color",
+              "id": "tmonial_author_color",
+              "label": "Author Text Color:",
+              "default": "#222"
+            },
+            {
+              "type": "text",
+              "id": "tmonial_author_designation",
+              "label": "Author Designation",
+              "default": "CEO"
+            },
+            {
+              "type": "color",
+              "id": "tmonial_author_designation_color",
+              "label": "Author Designation Color:",
+              "default": "#222"
+            }
+          ]
+		},
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+	],
+
+	"presets": [
+		{
+		  "name": "Testmonial",
+		  "category": "07. others",
+		  "blocks":[
+				{
+					"type": "testmonial"
+				},
+				{
+					"type": "testmonial"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

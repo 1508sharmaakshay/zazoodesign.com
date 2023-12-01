@@ -1,0 +1,94 @@
+<div  id="section-{{ section.id }}">
+  <div class="footer_bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="copyright_area">
+            {{ section.settings.copy_ritht_text }}
+          </div>
+        </div>    
+        <div class="col-lg-6 col-md-6">    
+          <div class="footer_payment">
+            {% if section.settings.payment_footer_logo %}
+            <a href="{{ section.settings.payment_footer_logo_url }}"> <img src="{{ section.settings.payment_footer_logo | img_url: 'large' }}" alt="{{ section.settings.Image_test.alt }}"></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<style>
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'footer_copy_right_color' -%}
+
+  #section-{{ section.id }}{
+    background-color: {{ block.settings.footer_section_bg_color }};
+  }
+  #section-{{ section.id }} .copyright_area p{
+    color: {{ block.settings.copyright_text_color }};
+  }
+  #section-{{ section.id }} .copyright_area p a {
+    color: {{ block.settings.copyright_url_text_color }};
+  }
+
+  {% endcase %}
+  {% endfor %}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Copy Right Section",
+    "settings": [
+        {
+          "type": "richtext",
+          "id": "copy_ritht_text",
+          "label": "CopyRight Text",
+          "default": "<p>Copyright © HasThemes All Right Reserved.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_footer_logo",
+          "label": "Payment Logo:",
+          "info": "Recommended Size: 260px x 30px"
+        },
+     	{
+        "type": "url",
+        "id": "payment_footer_logo_url",
+        "label": "Payment logo URL"
+
+        }
+    ],
+	"blocks":[
+	   {
+          "type": "footer_copy_right_color",
+          "name": "Footer Copy Right Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "color",
+			  "id": "footer_section_bg_color",
+			  "label": "Footer Section BG Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "color",
+			  "id": "copyright_text_color",
+			  "label": "Copy Right Text Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "color",
+			  "id": "copyright_url_text_color",
+			  "label": "Copy Right Link Color",
+			  "default": "#323232"
+			}
+          ]
+       }
+	]
+  }
+
+{% endschema %}

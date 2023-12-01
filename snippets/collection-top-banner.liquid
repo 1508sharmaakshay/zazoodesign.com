@@ -1,0 +1,19 @@
+{% if section.settings.top_banner_enable == true %}
+{% if section.settings.custom_collection_banner == "custom_banner" %}
+<div class="top-banner-area">
+  <div class="imgbanner imgbanner-2">
+    <a href="{{ section.settings.banner_top_url }} "><img src="{% if section.settings.banner_img_top %}{{ section.settings.banner_img_top | img_url: 'master' }}
+      {% else %}https://via.placeholder.com/875x450{% endif %}" alt="Shop banner images"> </a> 
+  </div>
+</div>
+{%  elsif section.settings.custom_collection_banner == "each_collection_automate" %}
+
+{% if collection.image %}
+<div class="top-banner-area">
+  <div class="imgbanner imgbanner-2">
+    <a href="{{ section.settings.banner_top_url }} "><img src="{{ collection.image.src | collection_img_url: '875x450' }}" alt="{{ collection.image.alt }}"> </a> 
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}

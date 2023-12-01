@@ -1,0 +1,111 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+<!-- Single Product Start Here -->
+<div class="single-makal-product">
+  
+  
+  {% if product.description contains '[countdown]' %}
+  {% assign count_down_first = product.description | split:'[/countdown]' | first %}
+  {% assign count_down_final = count_down_first | split:'[countdown]' | last %}
+  <div class="countdown" data-countdown="{{ count_down_final }}"></div> 
+  {% endif %}    
+
+  
+  <div class="pro-img">
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | img_url : '350X425', crop: 'center' }}" alt="{{ image.alt | escape }}">
+    </a>
+    
+    {%- include 'product-badge' -%}
+    
+
+    {%- if settings.product_quickview_enalbe -%}
+    <div class="quick-view-pro">
+      <a class="quick-view" title="Quick View" data-toggle="modal" data-target="#product-window" href="javascript:void(0);" onclick="quiqview('{{ product.handle | handleize }}')"></a>
+    </div>
+    {%- endif -%}    
+    
+    
+  </div>
+  <div class="pro-content">
+    <h4 class="pro-title">
+      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+    </h4>
+    
+    <p>
+        {% if product.compare_at_price_max > product.price %}
+        <span class="prev-price">{{ product.compare_at_price | money }}</span>
+        {% endif %}     
+        <span class="price">{{ product.price | money }}</span>  
+    </p>
+    
+    <div class="pro-actions">
+      
+      
+      {%- unless product.description contains '[affiliate_link]' -%}
+      <div class="actions-primary">
+        {% if product.available %}
+        {% if settings.product_cart_type == 'ajax_spin_cart' %}
+        <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart" data-toggle="tooltip" data-original-title="Add to Cart">
+          <span>
+            <span class="cart-title">{{ settings.cart_button_title }}</span>
+            <span class="cart-loading">{{ settings.wait_title }}</span>
+            <span class="cart-added">{{ settings.added_title }}</span>
+            <span class="cart-unavailable">{{ settings.unavailable_title }}</span>
+          </span>
+        </a>
+        {% elsif settings.product_cart_type == 'ajax_popup_cart' %}
+        <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart" data-toggle="tooltip" data-original-title="Add to Cart">
+          <span>
+            <span class="cart-title">{{ settings.cart_button_title }}</span>
+          </span>
+        </a>
+        {% elsif settings.product_cart_type == 'without_ajax_cart' %}
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          <select name="id" style="display:none;">
+            {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="">
+            <span>
+              <span class="cart-title">{{ settings.cart_button_title }}</span>
+            </span>
+          </button>
+        </form>
+        {% endif %}
+        {% else %}
+        <button class="cart-disable">
+          <span class="cart-text">{{ settings.soldout_button_title }}</span>
+        </button>
+        {% endif %}
+      </div>
+      {%- endunless -%}    
+      
+      <div class="actions-secondary">
+        <div class="rating">
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Single Product End Here -->
+
+
+
+

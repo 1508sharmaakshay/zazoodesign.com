@@ -1,0 +1,42 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+<!-- Single Product -->
+<article class="hoproduct hoproduct-4">
+  <div class="hoproduct-image">
+    <a class="hoproduct-thumb" href="{{ product.url | within: collection }}">
+      <img  class="hoproduct-frontimage"  src="{{ product.featured_image.src | img_url : '800X800', crop: 'center' }}" alt="{{ image.alt | escape }}">
+    </a>
+  </div>
+  <div class="hoproduct-content">
+    <h5 class="hoproduct-title"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
+    <div class="hoproduct-rattingbox">
+      <div class="rattingbox">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span> 
+      </div>
+    </div>
+    {% render 'junip-product-summary', product: product %}
+    <div class="hoproduct-pricebox">
+      <div class="pricebox">
+        {% if product.compare_at_price_max > product.price %}
+        <del class="oldprice">{{ product.compare_at_price | money }}</del>
+        {% endif %}
+        <span class="price">{{ product.price | money }}</span>
+      </div>
+    </div>
+  </div>
+</article>
+<!--// Single Product -->

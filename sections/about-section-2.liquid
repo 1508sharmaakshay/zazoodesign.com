@@ -1,0 +1,321 @@
+{% if section.settings.about_us_enable_area %}
+
+<div id="section-{{ section.id }}" class="welcome_lukani_store">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="welcome_lukani_container">
+      <div class="row">
+        {% if section.settings.about_img_hide %}
+        <div class="col-lg-5 col-md-5">
+          <div class="welcome_lukani_thumb">
+            <img src=" {% if section.settings.banner_img %} {{ section.settings.banner_img | img_url: '325x438' }}  {% else %}  https://via.placeholder.com/325x438 {% endif %}" alt="{{ section.settings.banner_img.alt }}">
+          </div>
+        </div>
+        {% endif %}
+        <div class="col-lg-7 col-md-7">
+          <div class="welcome_lukani_content">
+            <div class="welcome_lukani_header">
+              {% if section.settings.about_title_sub %}
+              <h3>{{ section.settings.about_title_sub }}</h3>
+              {% endif %}
+
+              {% if section.settings.about_title %}
+              <h2>{{ section.settings.about_title }}</h2>
+              {% endif %}
+
+            </div>
+            {% if section.settings.about_content %}
+            <div class="welcome_lukani_desc">
+              <p>{{ section.settings.about_content }}</p>
+            </div>
+            {% endif %}
+            <div class="welcome_lukani_footer">
+              {% if section.settings.about_sign_hide %}
+              <img src=" {% if section.settings.sing_img %} {{ section.settings.sing_img | img_url: 'large' }}  {% else %}  https://via.placeholder.com/228x129 {% endif %}" alt="{{ section.settings.sing_img.alt }}">
+              {% endif %}
+              {% if section.settings.author_name %}
+              <p><span>{{ section.settings.author_name }}</span> – {{ section.settings.author_deg }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "About Us Two",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+    {
+      "type": "checkbox",
+      "id": "about_us_enable_area",
+      "label": "Enable Section",
+	  "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width ?",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Companny Image",
+      "info": "Recommended size 1770X900 px"
+    },
+    {
+      "type": "checkbox",
+      "id": "about_img_hide",
+      "label": "Enable Companny Image",
+	  "default": true
+    },
+    {
+      "type": "text",
+      "id": "about_title_sub",
+      "label": "About sub Title",
+      "default": "Welcome to Lukani store"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About Title",
+      "default": "Lukani History"
+    },
+    {
+      "type": "html",
+      "id": "about_content",
+      "label": "About Content ",
+      "default": "Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus. Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend feugiat lectus laoreet, vel nunc taciti integer cras. Hac pede dis, praesent nibh ac dui mauris sit. Pellentesque mi, facilisi mauris, elit sociis leo sodales accumsan. Iaculis ac fringilla torquent lorem consectetuer, sociosqu phasellus risus urna aliquam, ornare."
+    },
+    {
+      "type": "image_picker",
+      "id": "sing_img",
+      "label": "Companny Signature",
+      "info": "Recommended size 228X129 px"
+    },
+    {
+      "type": "checkbox",
+      "id": "about_sign_hide",
+      "label": "Enable Signature",
+	  "default": true
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author Name",
+      "default": "john doe"
+    },
+    {
+      "type": "text",
+      "id": "author_deg",
+      "label": "Author Position",
+      "default": "CEO Lukani"
+    }
+
+
+
+  ],
+  "blocks": [
+       {
+          "type": "section_margin",
+          "name": "Section Margin",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_padding",
+          "name": "Section Padding",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_background",
+          "name": "Section Background",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "section_bg_image",
+              "label": "BG Image"
+            },
+            {
+              "type": "color",
+              "id": "section_bg_color",
+              "label": "BG Color",
+              "default": "#ffffff"
+            }
+          ]
+       }
+  ],
+	"presets": [
+		{
+		  "name": "About Section Two",
+		  "category": "07. others"
+		}
+	]
+  }
+{% endschema %}
+
+{% include 'section_typography' %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

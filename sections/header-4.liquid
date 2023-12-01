@@ -1,0 +1,1127 @@
+{% assign itemStyle = '' %}{% if cart.item_count == 0 %}{% assign itemStyle = ' style="display:none;"' %}{% endif %}
+{% assign itemEmpty = '' %}{% if cart.item_count == 0 %}{% assign itemEmpty = ' style="display:block;"' %}{% endif %}
+{%- assign item_count = cart.item_count -%}
+<header id="section-{{ section.id }}" class="hdr_four {% if section.settings.transparent_enable %}  header_transparent {% endif %} ">
+  <div class="main_header   sticky-header">
+    <div class="header_container">
+      <div class="container-fluid">
+        <div class="header_top_four">
+          <div class="row align-items-center">  
+            <div class="col-lg-4">
+              {% if section.settings.enable_search %}
+              <div class="search_container search_four">
+                {% include 'search-bar' %}
+              </div>
+              {% endif %}
+            </div>
+            <div class="col-lg-4">
+              <div class="logo logo_four">
+                {%- include 'header-logo' -%}
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="header_account_area header_account_four">
+                {% if section.settings.enable_settings_menu %}
+                <div class="header_account-list top_links">
+                  <a href="/account"> <i class="icon-users"></i> </a>
+                  <!-- Dropdown Start -->
+                  <ul class="dropdown_links">
+                    {% assign account_menu = section.settings.account_menu_handle %}
+                    {% for link in linklists[account_menu].links %}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+                {% if section.settings.enable_wishlist_menu %}
+                <div class="header_account-list header_wishlist">
+                  <a href="/pages/wishlist"><i class="icon-heart"></i></a>
+                </div>
+                {% endif %}
+
+                {% if section.settings.enable_mini_cart_menu %}
+                <div class="header_account-list  mini_cart_wrapper">
+                  {%- include 'mini-cart' -%}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+                          <!-- Mobile Navigation Start Here -->
+              <div class="site-mobile-navigation d-block d-lg-none">
+                {%- if section.settings.mobile_menu == "default" -%}
+                {% include 'mobile_main_menu' %}
+                {%- elsif section.settings.mobile_menu == "offcanvas" -%}
+                <div class="mobile-navigation-icon" id="mobile-menu-trigger">
+                  <i></i>
+                </div>
+                {%- include 'offcanvas_menu' -%}
+                {%- endif -%}
+              </div>
+              <!-- Mobile Navigation End Here -->
+          </div>     
+        </div>
+        <div class="header_bottom_four">
+          <div class="row">
+            <!-- Menu Area Start Here -->
+            <div class="col-lg-6 offset-lg-3 d-none d-lg-block main___m">
+              {% if section.settings.main_menu_enable %}
+              <div class="site-main-nav d-none d-lg-block">
+                <nav class="site-nav center-menu">
+                  {% include 'main-menu' %}
+                </nav>
+              </div>
+              {% endif %}
+            </div>
+            <!-- Menu Area End Here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</header>
+<!--header area end-->
+
+
+
+
+
+
+{% include 'section_typography' %}
+<style>
+  .logo img{
+    max-width: {{ section.settings.logo_width }}px;
+  }
+
+  {% for block in section.blocks %} 
+
+  {% case block.type %}		
+  {% when 'header_typography' %}
+
+  #section-{{ section.id }} .header_top {
+    background-color: {{ block.settings.header_top_bg_color }};
+    border-color: {{ block.settings.header_top_broder_color }};
+  }
+  #section-{{ section.id }}  .currency-trigger , #section-{{ section.id }} .welcome-text p,.top__language #gtranslate_wrapper select , .top__language #gtranslate_wrapper::after {
+    color: {{ block.settings.header_top_text_color }};
+  }
+  #section-{{ section.id }}.header-top .header-top-left > ul > li:hover > a,#section-{{ section.id }}.header-top .header-top-right > ul > li:hover > a,#section-{{ section.id }}.header-top .switcher-currency-trigger.currency .currency-trigger:hover ,#section-{{ section.id }}.header-top .social-icon li:hover a {
+    color: {{ block.settings.header_top_text_color_on_hover }};
+  }
+  #section-{{ section.id }} .header_middle {
+    background: {{ block.settings.header_bg_color }};
+    border-color: {{ block.settings.main_header_bottom_broder_color }};
+  }
+  #section-{{ section.id }}  .search_container, #section-{{ section.id }}  .header_account_area {
+    border-color: {{ block.settings.main_header_bottom_broder_color }};
+  }
+  
+  #section-{{ section.id }} .search_box input ,#section-{{ section.id }} .header_account-list > a,#section-{{ section.id }}  .search_box button {
+    color: {{ block.settings.header_text_color }};
+  }
+  #section-{{ section.id }}  .search_box button:hover ,#section-{{ section.id }} .header_account-list > a:hover {
+    color: {{ block.settings.header_text_color_on_hover }};
+  }
+  
+  
+  
+ /* menu Color   */
+  
+  
+
+
+  #section-{{ section.id }} .header_bottom  {
+    background: {{ block.settings.menu_area_bg_color }}; 
+  }
+  #section-{{ section.id }} .header_bottom ,#section-{{ section.id }}  .categories_title {
+    border-color:  {{ block.settings.menu_area_borders_color }}; 
+  }
+  
+  #section-{{ section.id }} .call-support p, #section-{{ section.id }} nav.site-nav > ul > li.menu-item-has-children > a::before, #section-{{ section.id }}  nav.site-nav > ul > li a ,#section-{{ section.id }} .categories_title h2 , #section-{{ section.id }} .categories_title::before {
+    color:{{ block.settings.menu_area_txt_color }}; 
+  }
+
+ #section-{{ section.id }} nav.site-nav > ul > li.menu-item-has-children:hover > a::before, #section-{{ section.id }}  nav.site-nav > ul > li:hover a   {
+    color:{{ block.settings.menu_area_txt_color_on_hover }}; 
+  }
+  
+  
+  #section-{{ section.id }} .cart-box > ul > li > a,  .header-bottom-list > li > a , nav.site-nav > ul > li a,nav.site-nav > ul > li.menu-item-has-children > a::before  {
+    color: {{ block.settings.header_text_color }};
+  }
+  #section-{{ section.id }} .header-top-right > ul > li > ul.ht-dropdown li:hover > a , #section-{{ section.id }} .header-bottom-list > li.active > a, .header-bottom-list > li:hover > a,nav.site-nav > ul > li:hover a,nav.site-nav > ul > li.menu-item-has-children:hover > a::before {
+    color:{{ block.settings.header_text_color_on_hover }}; 
+  }
+  
+  
+
+  #section-{{ section.id }} .category-toggle-wrap nav.category-menu > ul > li .category-mega-menu ,#section-{{ section.id }} .category-toggle-wrap nav.category-menu, #section-{{ section.id }}  nav.site-nav > ul > li ul.sub-menu,#section-{{ section.id }}  nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children .multilevel-submenu {
+    background: {{ block.settings.dropdown_bg_color }}; 
+  }
+  #section-{{ section.id }}  .category-toggle-wrap nav.category-menu > ul > li .category-mega-menu > li > ul li a ,#section-{{ section.id }} .categories_menu_toggle > ul > li > a,  #section-{{ section.id }} nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children::after ,#section-{{ section.id }} nav.site-nav > ul > li ul.single-column-menu li a , #section-{{ section.id }} .menu_sin_product .product__price .money ,#section-{{ section.id }} nav.site-nav > ul > li ul.mega-menu-column-4 > li .mega-sub-menu li a,  #section-{{ section.id }} .menu_sin_product .product-title a {
+    color: {{ block.settings.dropdown_text_color }}; 
+  }
+  #section-{{ section.id }}  .category-mega-menu.dropdown.megamenu > li:hover > a , #section-{{ section.id }}  .category-toggle-wrap nav.category-menu > ul > li .category-mega-menu > li > ul li:hover a ,#section-{{ section.id }}  .categories_menu_toggle > ul > li:hover > a, #section-{{ section.id }} nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children:hover::after , #section-{{ section.id }} .menu_sin_product .product-title:hover a,#section-{{ section.id }} nav.site-nav > ul > li ul.mega-menu-column-4 > li .mega-sub-menu li a:hover,#section-{{ section.id }} nav.site-nav > ul > li ul.single-column-menu li:hover > a {
+    color: {{ block.settings.dropdown_text_color_on_hover }}; 
+  }
+  #section-{{ section.id }}  .category-mega-menu.dropdown.megamenu > li > a ,#section-{{ section.id }} nav.center-menu .mega-menu a.mega-column-title, #section-{{ section.id }} .mega-menu .product_menu_title {
+    color:  {{ block.settings.mega_main_title_border_color }};
+  }
+  #section-{{ section.id }} nav.site-nav > ul > li a span {
+    background: {{ block.settings.menu_badge_bg_color }};
+  }
+  #section-{{ section.id }} nav.site-nav > ul > li a span,.mean-container .mean-nav ul li a span {
+    color: {{ block.settings.menu_badge_text_color }};
+  }
+  #section-{{ section.id }} nav.site-nav > ul > li a span,nav.site-nav > ul > li a span::before,.mean-container .mean-nav ul li a span,.mean-container .mean-nav ul li a span::before {
+    background: {{ block.settings.menu_badge_bg_color }};
+  }
+  #section-{{ section.id }} nav.site-nav > ul > li a span.sale,nav.site-nav > ul > li a span.sale::before, .mean-container .mean-nav ul li a span.sale,.mean-container .mean-nav ul li a span.sale::before {
+    background: {{ block.settings.menu_sale_badge_bg_color }};
+  }
+  #section-{{ section.id }} nav.site-nav > ul > li a span.sale,.mean-container .mean-nav ul li a span.sale {
+    color: {{ block.settings.menu_sale_badge_text_color }};
+  }
+  /* menu color   */
+  .cart-empty-title h3 {
+    color: {{ block.settings.dropdown_text_color }};
+  }
+  
+  {%- when 'offcanvas_color' -%}
+   #section-{{ section.id }} .offcanvas-menu-close,#section-{{ section.id }} .mean-container a.meanmenu-reveal {
+    background: {{ block.settings.close_icon_bg_color }};
+    color: {{ block.settings.close_icon_text_color }};
+   }
+  .mean-container a.meanmenu-reveal span ,#section-{{ section.id }} .mobile-navigation-icon i,#section-{{ section.id }} .mobile-navigation-icon i:before,#section-{{ section.id }} .mobile-navigation-icon i:after  {
+    background-color: {{ block.settings.mobile_hamburger_icon }};
+  }
+  
+  #section-{{ section.id }} .offcanvas-wrapper,#section-{{ section.id }} .mean-container .mean-bar {
+    background-color: {{ block.settings.off_menu_bg_color }};
+  }
+ #section-{{ section.id }} .mean-container .mean-nav ul li a, #section-{{ section.id }} .offcanvas-navigation > ul > li > a,#section-{{ section.id }} .offcanvas-navigation ul.sub-menu > li > a,
+  #section-{{ section.id }} .offcanvas-navigation ul li.menu-item-has-children .menu-expand,.offcanvas-navigation ul li.menu-item-has-children .menu-expand i::before {
+    color: {{ block.settings.off_can_menu_color }};
+  }
+  #section-{{ section.id }} .offcanvas-navigation > ul li:hover > a ,#section-{{ section.id }} .mean-container .mean-nav ul li:hover a , #section-{{ section.id }} .offcanvas-navigation > ul > li > a:hover,#section-{{ section.id }} .offcanvas-navigation ul.sub-menu > li > a:hover {
+    color: {{ block.settings.off_can_menu_hover_color }};
+  }
+   #section-{{ section.id }} .offcanvas-navigation > ul li a span,#section-{{ section.id }}  .mean-container .mean-nav ul li a span {
+    background: {{ block.settings.menu_badge_bg_color }};
+    color: {{ block.settings.menu_badge_color }};
+  }
+  #section-{{ section.id }} .offcanvas-navigation>ul li a span::before,#section-{{ section.id }}  .mean-container .mean-nav ul li a span::before {
+    background: {{ block.settings.menu_badge_bg_color }};
+  }
+  
+  
+  #section-{{ section.id }} .offcanvas-navigation>ul li a span.sale,#section-{{ section.id }}  .mean-container .mean-nav ul li a span.sale{
+    background: {{ block.settings.menu_sale_badge_bg_color }};
+    color: {{ block.settings.menu_sale_badge_color }};
+  }
+  #section-{{ section.id }} .offcanvas-navigation>ul li a span.sale::before,#section-{{ section.id }}  .mean-container .mean-nav ul li a span.sale::before { 
+    background: {{ block.settings.menu_sale_badge_bg_color }};
+  }
+  #section-{{ section.id }} .offcanvas-mobile-search-area input {
+    background: {{ block.settings.input_bg_color }};
+    color: {{ block.settings.input_text_color }};
+  }
+  #section-{{ section.id }} .offcanvas-mobile-search-area button {
+    color: {{ block.settings.submit_btn_color }};
+  }
+
+  #section-{{ section.id }} .offcanvas-mobile-menu .social-icons--footer ul li a {
+    color: {{ block.settings.socila_icon_color }};
+  }
+  {% endcase %}
+  {% endfor %}
+</style>
+
+{% schema %}
+  {
+    "name": "Header 4/4",
+    "settings": [
+		{
+			"type": "header",
+			"content": "Header"
+		},
+		{
+			"type": "checkbox",
+			"id": "transparent_enable",
+			"label": "Transparent header Enable",
+			"default": false
+		},
+		{
+			"type": "header",
+			"content": "Logo"
+		},
+		{
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+		{
+          "type": "range",
+          "id": "logo_width",
+          "label": "Custom logo width",
+          "min": 100,
+          "max": 300,
+          "step": 5,
+          "unit": "px",
+          "default": 150
+        },
+		{
+          "type": "header",
+          "content": "Search"
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_search",
+          "label": "Show/Hide Search",
+		  "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_settings_menu",
+          "label": "Enable Account Menu",
+		  "default": true
+        },
+		{
+			"type": "link_list",
+			"id": "account_menu_handle",
+			"label": "Account Menu"
+		},
+		{
+          "type": "checkbox",
+          "id": "enable_wishlist_menu",
+          "label": "Enable Wishlist Menu",
+		  "default": true
+        },
+        {
+            "type": "header",
+            "content": "Mini Cart"
+         },
+         {
+            "type": "checkbox",
+            "id": "enable_mini_cart_menu",
+            "label": "Enable Mini cart Menu",
+            "default": true
+         },
+         {
+            "type": "text",
+            "id": "checkout_title",
+            "label": "Checkout Title",
+            "default": "Checkout"
+         },
+
+         {
+            "type": "header",
+            "content": "Main Menu"
+         },
+		 {
+          "type": "checkbox",
+          "id": "main_menu_enable",
+          "label": "Main Menu Enable",
+		  "default": true
+         },
+		 {
+            "type": "radio",
+            "id": "mobile_menu",
+            "label": "Mobile Menu Type -",
+            "options": [
+              {
+                "label": "Default",
+                "value": "default"
+              },
+              {
+                "label": "Offcanvas ",
+                "value": "offcanvas"
+              }
+            ],
+            "default": "offcanvas"
+         },	
+		 {
+            "type": "header",
+            "content": "Offcanvas Menu"
+         },
+		 {
+            "type": "checkbox",
+            "id": "mobile_search_field_enable",
+            "label": "Search Bar Enable for Offcanvas Menu",
+            "default": true
+         },
+		 {
+            "type": "checkbox",
+            "id": "mobile_social_midea_enable",
+            "label": "Social media enable for Offcanvas Menu",
+            "default": true
+         },
+		 {
+			"type": "textarea",
+			"id": "welcome_text",
+			"label": "Welcome text here",
+			"default": "Free Delivery: Take advantage of our time to save event"
+		},
+        {
+          "type": "textarea",
+          "id": "call_support",
+          "label": "Menu Call Support",
+          "default": "Call Support: (+800) 123 456 789"
+        },
+		{
+			"type": "header",
+			"content": "Header Right Menu"
+			
+		},
+		{
+          "type": "checkbox",
+          "id": "top__language_enable",
+          "label": "Enable Language Menu",
+		  "default": true
+        },
+
+		{
+          "type": "checkbox",
+          "id": "sec_currency_enable",
+          "label": "Enable Currency Menu",
+		  "default": true
+        }
+
+	],
+
+	"blocks":[
+
+        {
+          "type": "megamenu",
+          "name": "Mega Menu",
+		  "limit": 5,
+          "settings": [
+			{
+              "type": "header",
+              "content": "Mega Menu"
+            },
+            {
+              "type": "textarea",
+              "id": "mega_title",
+              "label": "Menu Item Full Name",
+               "info": "Copy and Pase Full Item name From Main Menu"
+            },
+            {
+              "type": "header",
+              "content": "Mega Sub Menu#1"
+            },
+            {
+              "type": "textarea",
+              "id": "mege_level_2",
+              "label": "Menu Item Full Name",
+               "info": "Copy and Pase Full Item name From Main Menu"
+            },
+            {
+              "type": "link_list",
+              "id": "level3_menu",
+              "label": "Select Menu"
+            },
+			 {
+              "type": "header",
+              "content": "Mega Sub Menu#2"
+            },
+            {
+              "type": "textarea",
+              "id": "mege_level_2_set2",
+              "label": "Menu Item Full Name",
+               "info": "Copy and Pase Full Item name From Main Menu"
+            },
+            {
+              "type": "link_list",
+              "id": "level3_menu_2",
+              "label": "Select Menu"
+            },
+			{
+              "type": "header",
+              "content": "Mega Sub Menu#3"
+            },
+            {
+              "type": "textarea",
+              "id": "mege_level_2_set3",
+              "label": "Menu Item Full Name",
+               "info": "Copy and Pase Full Item name From Main Menu"
+            },
+            {
+              "type": "link_list",
+              "id": "level3_menu_3",
+              "label": "Select Menu"
+            },
+            {
+              "type": "header",
+              "content": "Mega Menu Gallery"
+            },
+            {
+              "type": "checkbox",
+              "id": "megamenu_gallery",
+              "label": "Mega menu Gallery",
+              "default": true
+            },
+            {
+            "type": "radio",
+            "id": "megamenu_gallery_type",
+            "label": "Gallery Type -",
+            "options": [
+              {
+                "label": "Banner",
+                "value": "banner"
+              },
+              {
+                "label": "Product",
+                "value": "product"
+              }
+            ],
+            "default": "banner"
+            },
+            {
+              "type": "header",
+              "content": "Banner"
+            },
+            {
+              "type": "image_picker",
+              "id": "cat_banner_image",
+              "label": "Banner Iamge",
+              "info": "Recommended Size: 260 x 350 px"
+            },
+            {
+              "type": "text",
+              "id": "mega_banner_title1",
+              "label": "Title 1",
+              "default": "Sale"
+            },
+            {
+              "type": "textarea",
+              "id": "mega_banner_title2",
+              "label": "Title 2",
+              "default": "50%"
+            },
+            {
+              "type": "textarea",
+              "id": "mega_banner_content",
+              "label": "Content",
+              "default": "Lorem Ipsum Dolor"
+            },
+            {
+              "type": "text",
+              "id": "mega_banner_btn",
+              "label": "Button",
+              "default": "shop now!"
+            },
+            {
+              "type": "url",
+              "id": "mega_cat_banner_link",
+              "label": "Banner Link",
+              "default": "\/"
+            },
+			{
+			  "type": "color",
+			  "id": "banner_title1",
+			  "label": "Banner Title 1",
+			  "default": "#ffffff"
+            },
+		    {
+			  "type": "color",
+			  "id": "banner_title2",
+			  "label": "Banner Title 2",
+			  "default": "#ffffff"
+            },
+			{
+			  "type": "color",
+			  "id": "description_color",
+			  "label": "Description Color",
+			  "default": "#ffffff"
+            },
+			{
+			  "type": "color",
+			  "id": "banner_btn_color",
+			  "label": "Banner Button Color",
+			  "default": "#ffffff"
+            },
+            {
+               "type": "header",
+               "content": "Product"
+            },
+            {
+              "type": "text",
+              "id": "menu_product_title",
+              "label": "Title For Product Widget",
+              "default": "Handpick"
+            },
+            {
+              "type": "collection",
+              "id": "menu_product_cat_handle_id",
+              "label": "Select Your Collection"
+            },
+			{
+			  "type": "color",
+			  "id": "product_menu_titie_color",
+			  "label": "Product Menu Title Color",
+			  "default": "#333"
+            },
+			{
+			  "type": "range",
+			  "id": "product_title_trim",
+			  "min": 2,
+			  "max": 30,
+			  "step": 1,
+			  "label": "Product TItle Count",
+			  "default": 3
+			},
+			{
+			  "type": "color",
+			  "id": "product_title_color",
+			  "label": "Product Title Color",
+			  "default": "#333"
+            },
+			{
+			  "type": "color",
+			  "id": "product_price_color",
+			  "label": "Current Price Color",
+			  "default": "#333"
+            },
+			{
+			  "type": "color",
+			  "id": "product_old_price_color",
+			  "label": "Old Price Color",
+			  "default": "#aaa"
+            },
+            {
+               "type": "header",
+               "content": "Arrow Button"
+            },
+			{
+			  "type": "color",
+			  "id": "arrow_btn_bg_color",
+			  "label": "Arrow Button Bg Color",
+			  "default": "#fff"
+            },
+			{
+			  "type": "color",
+			  "id": "arrow_btn_color",
+			  "label": "Arrow Button Color",
+			  "default": "#333"
+            }
+          ]
+       },
+	   { 
+          "type": "submenu",
+          "name": "Multi-Level Menu",
+		  "limit": 5,
+          "settings": [
+			  {
+                "type": "header",
+                "content": "Submenu",
+                "info": "Submenu For Level 2"
+              },
+              {
+                "type": "textarea",
+                "id": "submenu_title",
+                "label": "Menu Item Full Name",
+                "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "header",
+                "content": "Four Level Sub Menu#1"
+              },
+              {
+                "type": "textarea",
+                "id": "multi_level_4",
+                "label": "Menu Item Full Name",
+                 "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "link_list",
+                "id": "multi_level4_menu",
+                "label": "Select Menu"
+              },
+			  {
+                "type": "header",
+                "content": "Four Level Sub Menu#2"
+              },
+              {
+                "type": "textarea",
+                "id": "multi_level_4_2",
+                "label": "Menu Item Full Name",
+                 "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "link_list",
+                "id": "multi_level4_menu_2",
+                "label": "Select Menu"
+              },
+			  {
+                "type": "header",
+                "content": "Four Level Sub Menu#3"
+              },
+              {
+                "type": "textarea",
+                "id": "multi_level_4_3",
+                "label": "Menu Item Full Name",
+                 "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "link_list",
+                "id": "multi_level4_menu_3",
+                "label": "Select Menu"
+              },
+			  {
+                "type": "header",
+                "content": "Four Level Sub Menu#4"
+              },
+              {
+                "type": "textarea",
+                "id": "multi_level_4_4",
+                "label": "Menu Item Full Name",
+                 "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "link_list",
+                "id": "multi_level4_menu_4",
+                "label": "Select Menu"
+              },
+			  {
+                "type": "header",
+                "content": "Four Level Sub Menu#5"
+              },
+              {
+                "type": "textarea",
+                "id": "multi_level_4_5",
+                "label": "Menu Item Full Name",
+                 "info": "Copy and Pase Full Item name From Main Menu"
+              },
+              {
+                "type": "link_list",
+                "id": "multi_level4_menu_5",
+                "label": "Select Menu"
+              }
+          ]
+       },
+	   {
+          "type": "dropdown",
+          "name": "Dropdown Menu",
+		  "limit": 10,
+          "settings": [
+			  {
+                "type": "header",
+                "content": "Submenu",
+                "info": "Submenu For Level 2"
+              },
+			  {
+                "type": "textarea",
+                "id": "dropdown_title",
+                "label": "Menu Item Full Name",
+                "info": "Copy and Pase Full Item name From Main Menu"
+              }
+          ]
+        },
+		{
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+        },
+	   {
+          "type": "header_typography",
+          "name": "Header Color Options",
+		  "limit": 1,
+          "settings": [
+              {
+                "type": "header",
+                "content": "Main Header Style"
+              },
+              {
+                "type": "color",
+                "id": "header_bg_color",
+                "label": "Header Bg color",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "main_header_bottom_broder_color",
+                "label": "Header Main Borders color",
+                "default": "#e0e0e0"
+              },
+              {
+                "type": "color",
+                "id": "header_text_color",
+                "label": "Header Text color",
+                "default": "#323232"
+              },
+              {
+                "type": "color",
+                "id": "header_text_color_on_hover",
+                "label": "Header Text color On Hover",
+                "default": "#c1b17e"
+              },
+              {
+                "type": "header",
+                "content": "Menu Area Style"
+              },
+              {
+                "type": "color",
+                "id": "menu_area_bg_color",
+                "label": "Menu area Bg color",
+                "default": "#fff"
+              },
+                 {
+                "type": "color",
+                "id": "menu_area_txt_color",
+                "label": "Menu area Text color",
+                "default": "#222"
+              },
+              {
+                "type": "color",
+                "id": "menu_area_txt_color_on_hover",
+                "label": "Menu area Text color On Hover",
+                "default": "#79a206"
+              },
+              {
+                "type": "color",
+                "id": "menu_area_borders_color",
+                "label": "Menu area Borders Color",
+                "default": "#e1e1e1"
+              },
+              {
+                 "type":      "paragraph",
+                 "content":   "Dropdown Menu Style"
+              },
+              {
+                "type": "color",
+                "id": "dropdown_bg_color",
+                "label": "Dropdown Menu Bg color",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "dropdown_text_color",
+                "label": "Dropdown Menu Text color",
+                "default": "#7e7e7e"
+              },
+              {
+                "type": "color",
+                "id": "dropdown_text_color_on_hover",
+                "label": "Dropdown Menu Text color On Hover",
+                "default": "#c1b17e"
+              },
+              {
+                "type": "color",
+                "id": "mega_main_title_border_color",
+                "label": "Mega Menu main Title color",
+                "default": "#323232"
+              },
+              {
+                "type": "header",
+                "content": "Menu Badge Style"
+              },
+              {
+                "type": "color",
+                "id": "menu_badge_bg_color",
+                "label": "Menu New Badge Bg Color",
+                "default": "#D3122A"
+              },
+              {
+                "type": "color",
+                "id": "menu_badge_text_color",
+                "label": "Menu New Badge Text Color",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "menu_sale_badge_bg_color",
+                "label": "Menu Sale Badge Bg Color",
+                "default": "#43b5f4"
+              },
+              {
+                "type": "color",
+                "id": "menu_sale_badge_text_color",
+                "label": "Menu Sale Badge Text Color",
+                "default": "#fff"
+              }
+          ]
+		},
+	    {
+          "type": "offcanvas_color",
+          "name": "Mobile Menu Color Options",
+		  "limit": 1,
+          "settings": [
+			{
+              "type": "header",
+              "content": "Hamburger Icon"
+            },
+			{
+			  "type": "color",
+			  "id": "mobile_hamburger_icon",
+			  "label": "Hamburger Icon Color",
+			  "default": "#fff"
+            },
+			{
+              "type": "header",
+              "content": "Close Button"
+            },
+			{
+			  "type": "color",
+			  "id": "close_icon_bg_color",
+			  "label": "Close Button Bg Color",
+			  "default": "#343538"
+            },
+			{
+			  "type": "color",
+			  "id": "close_icon_text_color",
+			  "label": "Close Button Icon Color",
+			  "default": "#fff"
+            },
+		    {
+              "type": "header",
+              "content": "Background Color"
+            },
+			{
+			  "type": "color",
+			  "id": "off_menu_bg_color",
+			  "label": "Background Color",
+			  "default": "#fff"
+            },
+			{
+              "type": "header",
+              "content": "Menu Color"
+            },
+			{
+			  "type": "color",
+			  "id": "off_can_menu_color",
+			  "label": "Menu Item Color",
+			  "default": "#7e7e7e"
+            },
+			{
+			  "type": "color",
+			  "id": "off_can_menu_hover_color",
+			  "label": "Menu Item Hover Color",
+			  "default": "#333"
+            },
+			{
+              "type": "header",
+              "content": "Menu Special Badge"
+            },
+			{
+			  "type": "color",
+			  "id": "menu_badge_bg_color",
+			  "label": "Menu Badge Background Color",
+			  "default": "#D3122A"
+            },
+			{
+			  "type": "color",
+			  "id": "menu_badge_color",
+			  "label": "Menu Badge Color",
+			  "default": "#fff"
+            },
+			{
+			  "type": "color",
+			  "id": "menu_sale_badge_bg_color",
+			  "label": "Menu Sale Badge Background Color",
+			  "default": "#98d8ca"
+            },
+			{
+			  "type": "color",
+			  "id": "menu_sale_badge_color",
+			  "label": "Menu Sale Badge Color",
+			  "default": "#fff"
+            },
+			{
+              "type": "header",
+              "content": "Search Bar"
+            },
+			{
+			  "type": "color",
+			  "id": "input_bg_color",
+			  "label": "Input Background Color",
+			  "default": "#f2f2f2"
+            },
+			{
+			  "type": "color",
+			  "id": "input_text_color",
+			  "label": "Input Text Color",
+			  "default": "#555"
+            },
+			{
+			  "type": "color",
+			  "id": "submit_btn_color",
+			  "label": "Submit Button Color",
+			  "default": "#aaa"
+            },
+			{
+              "type": "header",
+              "content": "Social Icon"
+            },
+			{
+			  "type": "color",
+			  "id": "socila_icon_color",
+			  "label": "Social Icon Color",
+			  "default": "#333"
+            }
+          ]
+       }
+	]
+  }
+
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

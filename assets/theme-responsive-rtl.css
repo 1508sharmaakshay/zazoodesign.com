@@ -1,0 +1,537 @@
+
+
+@media (min-width: 1200px) and (max-width: 1299px){
+    nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children .multilevel-submenu{
+        right: -140%;
+        left: auto;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1169px){
+    nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children .multilevel-submenu{
+        right: -140%;
+        left: auto;
+    }
+
+    .main-shop-page .pro-img .product_countdown .count{
+        background: #343434 none repeat scroll right  0;
+        margin-left: 5px;
+        margin-right: auto;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .featured-product-iamge{
+        padding-left: 0;
+    }
+
+    .featured-product-content{
+        padding-right: 0;
+    }
+
+    .banner-area .single-banner h2.banner-category, .banner-area .single-banner .banner-category_wrap{
+        right: 12px;
+        left: auto;
+    }
+
+    .template-blog .theme-default-pagination{
+        margin: 35px 0 0px 0 ;
+    }
+
+    blockquote{
+        margin-right: 18px !important;
+        margin-left: auto;
+    }
+
+    .tag-list{
+        text-align: right;
+    }
+
+    .cart-main-area .table-content td.product-remove{
+        left: 10px;
+        right: auto;
+    }
+
+    .cart-main-area .table-content .pro-qty{
+        margin: 0 30px 0 10px ;
+    }
+
+    .cart-main-area .table-content td.product-name .product-variation{
+        margin: 3px 0 13px 0px ;
+    }
+
+    .cart-main-area .buttons-cart a{
+        margin-right: 10px !important;
+        margin-left: auto;
+    }
+
+    .shipping-info button,.wc-proceed-to-checkout a{
+        background: #303030 none repeat scroll right  0;
+    }
+
+    .cart-main-area .table-content table td.product-name a,.cart-main-area .product-stock-status span{
+        margin-right: 0;
+    }
+
+    .product_additional_information button{
+        margin-left: 30px;
+        margin-right: auto;
+    }
+
+    .header-style-four .header-top{
+        text-align: right;
+    }
+
+    .header-style-four .header-top-right ul > li > ul.ht-dropdown, .nrb_hdr_6 .header-top-right ul > li > ul.ht-dropdown{
+        right: auto;
+        left: 0;
+    }
+
+    .header-style-seven .site-mobile-navigation #mobile-menu-trigger{
+        left: 6px;
+        right: auto;
+    }
+
+    .header-top-right ul > li > ul.ht-dropdown{
+        right: auto;
+        left: 0;
+    }
+
+    .main-shop-page .pro-img .product_countdown .count{
+        background: #343434 none repeat scroll right  0;
+        margin-left: 5px;
+        margin-right: auto;
+    }
+  .blog-activation:hover .owl-nav div.owl-next, .our-pro-active:hover .owl-nav div.owl-next, .best-selling-active:hover .owl-nav div.owl-next {
+    right: auto;
+  }
+
+}
+
+@media (max-width: 767px){
+    .search-item-content{
+        padding-right: 0;
+    }
+
+    .featured-product-content{
+        padding-right: 0;
+    }
+
+    .featured-product-iamge{
+        padding-left: 0;
+    }
+
+    .ajax-popup .modal-content-text{
+        float: right;
+        margin-left: 0;
+    }
+
+    .popup-content .modal-button .btn.btn-cart{
+        margin-left: 10px;
+        margin-right: auto;
+    }
+
+    .ajax-popup .modal-content-text h6{
+        padding-left: 0;
+    }
+
+    .banner-area .container-fluid.p-0 .pt-20:nth-child(n){
+        padding-left: 0;
+    }
+
+    .banner-area .container-fluid.p-0 .pt-20:nth-child(2n){
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .nrb_hdr_6 .logo{
+        padding: 20px 0 15px 0 ;
+    }
+
+    .header-style-seven .header-form_area form.hm-searchbox input{
+        padding: 0 20px 0 36px ;
+    }
+
+    .slide .row.justify-content-start .slider-content.text-left {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .special-product-area.special-product-bg{
+        background-position: right !important;
+    }
+
+    .template-blog .theme-default-pagination{
+        margin: 35px 0 0px 0 ;
+    }
+
+    blockquote{
+        margin-right: 18px !important;
+        margin-left: auto;
+    }
+
+    .tag-list{
+        text-align: right;
+    }
+
+    .cart-main-area .table-content td.product-remove{
+        left: 10px;
+        right: auto;
+    }
+
+    .cart-main-area .table-content .pro-qty{
+        margin: 0 30px 0 10px ;
+    }
+
+    .cart-main-area .table-content td.product-name .product-variation{
+        margin: 3px 0 13px 0px ;
+    }
+
+    .shipping-info button,.wc-proceed-to-checkout a{
+        background: #303030 none repeat scroll right  0;
+    }
+
+    .cart-main-area .table-content table td.product-name a,.cart-main-area .product-stock-status span{
+        margin-right: 0;
+    }
+
+    .product_additional_information button{
+        margin-left: 13px;
+        margin-right: auto;
+    }
+
+    #list-view .single-makal-product .pro-content{
+        padding-right: 0;
+    }
+
+    .qwick-view-right{
+        text-align: right;
+    }
+
+    .quickview-btn-cart{
+        margin-right: 25px;
+        margin-left: auto;
+    }
+
+    #quickViewModal .modal-body{
+        padding-right: 10px;
+        padding-left: 16px;
+    }
+
+    .header-top-right > ul > li:not(:first-child){
+        margin-right: 0;
+    }
+
+    .header-top-right > ul > li:last-child > a{
+        padding-left: 0;
+    }
+
+    .header-style-two .site-mobile-navigation #mobile-menu-trigger{
+        left: 5px;
+        right: auto;
+    }
+
+    .header-style-two .header-top-right ul > li > ul.ht-dropdown{
+        right: 50%;
+        left: auto;
+        margin-right: -93px;
+        margin-left: auto;
+    }
+
+.header-style-two .cart-box .ht-dropdown.cart-box-width {
+	left: -190px;
+	right: auto;
+}
+
+    #section-header-5.header-top .header-top-right{
+        margin-left: 0;
+    }
+
+    #section-header-5 .cart-box > ul > li > a span + span.total-pro{
+        right: 14px;
+        left: auto;
+    }
+
+    .header-style-seven .site-mobile-navigation #mobile-menu-trigger{
+        left: 6px;
+        right: auto;
+    }
+
+    .product-details .product_countdown .count{
+        margin-left: 5px !important;
+        margin-right: auto;
+    }
+
+    #list-view .single-makal-product .pro-img{
+        padding-left: 0;
+    }
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    .header-style-six_2 .header-top-left{
+        margin-right: 31px;
+        margin-left: auto;
+    }
+
+    .header-style-two .site-mobile-navigation #mobile-menu-trigger{
+        left: 0;
+        right: auto;
+    }
+
+    #section-header-5 .cart-box > ul > li > a span + span.total-pro{
+        right: 32px;
+        left: auto;
+    }
+
+    .cart-box-right .ht-dropdown{
+        right: 22px;
+        left: auto;
+    }
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 540px){
+    .header-top-right > ul > li:not(:first-child){
+        margin-right: 0;
+    }
+
+}
+
+@media only screen and (max-width: 479px){
+    .form-action-button .theme-default-button + .theme-default-button,   .cart-buttons .theme-default-button + .theme-default-button{
+        margin-right: 0;
+    }
+
+    .form-action-button .theme-default-button,  .cart-buttons .theme-default-button,  .guest-form-container .theme-default-button{
+        float: right;
+    }
+
+    .header-style-two .categorie-search-box{
+        left: -246px;
+        right: auto;
+    }
+
+    .header-style-two .cart-box-width{
+        left: -210px;
+        right: auto;
+    }
+
+    .header-style-six_2 .cart-box > ul > li > a span + span.total-pro{
+        right: 12px;
+        left: auto;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 46 of 341 CSS properties converted by rtl.daskhat.ir 
+ These properties should be override originals. 
+ just load rtl css file after original css file.*/ 
+
+/* body {direction:rtl;} */
+
+@media (min-width: 1200px) and (max-width: 1299px){
+    nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children .multilevel-submenu{
+        right: -140%;
+        left: auto;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1169px){
+    nav.site-nav > ul > li ul.single-column-menu li.single-column-has-children .multilevel-submenu{
+        right: -140%;
+        left: auto;
+    }
+
+    .main-shop-page .pro-img .product_countdown .count{
+        background: #343434 none repeat scroll right  0;
+        margin-left: 5px;
+        margin-right: auto;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .cart-main-area .table-content td.product-remove{
+        left: -58px;
+        right: auto;
+    }
+
+    .cart-main-area .table-content .pro-qty{
+        margin: 0 30px 0 10px ;
+    }
+
+    .cart-main-area .table-content td.product-name .product-variation{
+        margin: 3px 0 13px 0px ;
+    }
+
+    .cart-main-area .buttons-cart a{
+        margin-right: 10px !important;
+        margin-left: auto;
+    }
+
+    .shipping-info button,.wc-proceed-to-checkout a{
+        background: #303030 none repeat scroll right  0;
+    }
+
+    .cart-main-area .table-content table td.product-name a,.cart-main-area .product-stock-status span{
+        margin-right: 0;
+    }
+
+    .product_additional_information button{
+        margin-left: 30px;
+        margin-right: auto;
+    }
+
+    .main-shop-page .pro-img .product_countdown .count{
+        background: #343434 none repeat scroll right  0;
+        margin-left: 5px;
+        margin-right: auto;
+    }
+
+    .dropdown_currency, .dropdown_language{
+        right: auto;
+        left: 0;
+    }
+
+    .cart-box-width{
+        right: auto;
+        left: -81px;
+    }
+
+}
+
+@media (max-width: 767px){
+    .swatch-element.soldout label::after{
+        margin-right: 3px;
+        margin-left: auto;
+    }
+
+    .dropdown_currency, .dropdown_language{
+        right: auto;
+        left: 0;
+    }
+
+    .cart-box-width{
+        right: auto;
+        left: -81px;
+    }
+
+    .ajax-popup .modal-content-text{
+        float: right;
+        margin-left: 0;
+    }
+
+    .popup-content .modal-button .btn.btn-cart{
+        margin-left: 10px;
+        margin-right: auto;
+    }
+
+    .ajax-popup .modal-content-text h6{
+        padding-left: 0;
+    }
+
+    .template-blog .theme-default-pagination{
+        margin: 35px 0 0px 0 ;
+    }
+
+    blockquote{
+        margin-right: 18px !important;
+        margin-left: auto;
+    }
+
+    .tag-list{
+        text-align: right;
+    }
+
+    .cart-main-area .table-content td.product-remove{
+        left: -58px;
+        right: auto;
+    }
+
+    .cart-main-area .table-content .pro-qty{
+        margin: 0 30px 0 10px ;
+    }
+
+    .cart-main-area .table-content td.product-name .product-variation{
+        margin: 3px 0 13px 0px ;
+    }
+
+    .shipping-info button,.wc-proceed-to-checkout a{
+        background: #303030 none repeat scroll right  0;
+    }
+
+    .cart-main-area .table-content table td.product-name a,.cart-main-area .product-stock-status span{
+        margin-right: 0;
+    }
+
+    .product_additional_information button{
+        margin-left: 13px;
+        margin-right: auto;
+    }
+
+    #list-view .single-makal-product .pro-content{
+        padding-right: 0;
+    }
+
+    .qwick-view-right{
+        text-align: right;
+    }
+
+    .quickview-btn-cart{
+        margin-right: 25px;
+        margin-left: auto;
+    }
+
+    #quickViewModal .modal-body{
+        padding-right: 10px;
+        padding-left: 16px;
+    }
+
+    .sticker-new.soldout-title{
+        right: 38px;
+        left: auto;
+    }
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    .header-style-six_2 .header-top-left{
+        margin-right: 31px;
+        margin-left: auto;
+    }
+
+}
+
+@media only screen and (max-width: 479px){
+    .form-action-button .theme-default-button + .theme-default-button,  .cart-buttons .theme-default-button + .theme-default-button{
+        margin-right: 0;
+    }
+
+    .form-action-button .theme-default-button,  .cart-buttons .theme-default-button,  .guest-form-container .theme-default-button{
+        float: right;
+    }
+
+    .cart-box-width{
+        right: auto;
+        left: -52px;
+    }
+
+}
+

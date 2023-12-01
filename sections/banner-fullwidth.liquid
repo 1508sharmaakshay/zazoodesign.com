@@ -1,0 +1,299 @@
+<div class="banner_fullwidth" id="section-{{ section.id }}">
+  <div  class="{%- if section.settings.banner_fluid == true -%}  container-fluid {%-else-%} container {%-endif-%}">
+    <div class="row">
+      <div class="col-12">
+        <div class="banner_fullwidth_content">
+          {% if section.settings.sub_title !=blank %}
+          <h3>{{ section.settings.sub_title }}</h3>
+          {% endif %}
+          {% if section.settings.title !=blank %}
+          <h2>{{ section.settings.title }}</h3>
+          {% endif %}
+
+          {% if section.settings.content_txt !=blank %}
+          <p>{{ section.settings.content_txt }}</p>
+          {% endif %}
+          {% if section.settings.btntext !=blank %}
+          <a href="{{ section.settings.btntxturl }}">{{ section.settings.btntext }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+{% include 'section_typography' %}
+<style>
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'prd_bnr_color' -%}
+  #section-{{ section.id }} .banner_content h3 {
+    color: {{ block.settings.sub_title_color }}
+  }
+  #section-{{ section.id }} .banner_content h2 {
+    color: {{ block.settings.main_title_color }}
+  }
+  #section-{{ section.id }} .banner_content a {
+    color: {{ block.settings.shop_now_color }}
+  }
+  #section-{{ section.id }} .banner_content a:hover {
+    color: {{ block.settings.shop_now_color_hover }}
+  }
+  #section-{{ section.id }} .banner_content a {
+    border-color: {{ block.settings.shop_now_bdr_color }}
+  }
+  {% endcase %}
+  {% endfor %}
+</style> 
+
+{% schema %}
+  {
+    "name": "Banner Fullwidth",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Banner Fullwidth"
+        },
+		{
+               "type": "checkbox",
+               "id": "banner_fluid",
+               "default": true,
+               "label": "Banner Fluid Enable"
+       	},
+		{
+          "type": "textarea",
+          "id": "sub_title",
+          "label": "Sub Titel",
+          "default": "Amazing From Lukani"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Main Title",
+          "default": "Plants The <br> Perfect Choice!"
+        },
+        {
+          "type": "textarea",
+          "id": "content_txt",
+          "label": "Main Title",
+          "default": "Discount 20% Off For Lukani Members"
+        },
+        {
+          "type": "text",
+          "id": "btntext",
+          "label": "Shop Now Text",
+          "default": "Discover Now"
+        },
+        {
+          "type": "url",
+          "id": "btntxturl",
+          "label": "Shop Now URL"
+        }
+    ],
+	"blocks":[
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+      }
+	],
+	"presets": [
+		{
+		  "name": "Banner Fullwidth",
+		  "category": "02. Banner",
+		  "blocks":[
+
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+
+
+

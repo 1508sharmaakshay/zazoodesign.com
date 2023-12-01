@@ -1,0 +1,39 @@
+{%- unless product.description contains '[affiliate_link]' -%}
+<li class="add_to_cart">
+  {% if product.available %}
+  {% if settings.product_cart_type == 'ajax_spin_cart' %}
+  <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart" data-toggle="tooltip" data-original-title="{{ settings.cart_button_title }}">
+    <span>
+      <span class="cart-title"><i class="icon-shopping-bag"></i></span>
+      <span class="cart-loading"><i class="fa fa-spinner animated rotateIn infinite"></i></span>
+      <span class="cart-added"><i class="icon-check-square"></i></span>
+      <span class="cart-unavailable"><i class="icon-shopping-bag"></i></span>
+    </span>
+  </a>
+  {% elsif settings.product_cart_type == 'ajax_popup_cart' %} 
+  <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart" data-toggle="tooltip" data-original-title="{{ settings.cart_button_title }}">
+    <span>
+      <span class="cart-title"> <i class="icon-shopping-bag"></i> </span>
+    </span>
+  </a>
+  {% elsif settings.product_cart_type == 'without_ajax_cart' %}
+  <form action="/cart/add" method="post" enctype="multipart/form-data" class="add-to-cart" data-toggle="tooltip" data-original-title="{{ settings.cart_button_title }}">
+    <select name="id" style="display:none;">
+      {% for variant in product.variants %}
+      <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="without_ajax_cart">
+      <span>
+        <span class="cart-title"><i class="icon-shopping-bag"></i></span>
+      </span>
+    </button>
+  </form>
+  {% endif %}
+  {% else %}
+  <button class="cart-disable" data-toggle="tooltip" data-original-title="{{ settings.soldout_button_title }}">
+    <span class="cart-text"><i class="icon-shopping-bag"></i></span>
+  </button>
+  {% endif %}
+</li> 
+{%- endunless -%} 

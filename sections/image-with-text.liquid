@@ -1,0 +1,251 @@
+<!-- Video Area -->
+<div class="video-banner" id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="video-area text-center">
+          <div class="static_video">
+            <img class="img_static" src="{{ section.settings.video_thumbnail_image | img_url: '1170x500', crop: 'center' }}" alt="image" />
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+          <div class="text_vdio_area">
+            <h2>{{ section.settings.main_title }}</h2>
+            <p>{{ section.settings.sub_title }} </p>
+            {{ section.settings.rich_text_handle }}
+            <div class="slide-btn small-btn">
+              <a href="{{ section.settings.noti_btn_url }}">{{ section.settings.noti_btn_text }}</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Our Video Area -->
+
+
+
+
+<style>
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+    {% endcase %}
+    {% endfor %}
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+</style>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Image With Text Banner",
+    "settings": [
+		{
+          "type": "image_picker",
+          "id": "video_thumbnail_image",
+          "label": "Thumbnail Image",
+		  "info": "Recommended Size: 1170 x 500px"
+      	},
+		{
+          "type": "textarea",
+          "id": "main_title",
+          "label": "Main Title",
+          "default": "Suprise Your Valentine! Let us arrange a smile For Her."
+      	},
+		{
+          "type": "textarea",
+          "id": "sub_title",
+          "label": "Sub Title",
+          "default": "Where flowers are our inspiration to create lasting memories. Whatever the occasion inspiration to create lasting memories.... "
+      	},
+		{
+          "type": "textarea",
+          "id": "rich_text_handle",
+          "label": "Description Text",
+ 		  "default": "<ul><li> Hand picked just for you. </li><li> Hand picked just for you. </li> <li> Hand picked just for. </li> </ul>"
+        },
+        {
+          "type": "text",
+          "id": "noti_btn_text",
+          "label": "Button Text",
+          "default": "More Details"
+        },
+        {
+          "type": "url",
+          "id": "noti_btn_url",
+          "label": "Button URL"
+        }
+
+
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Image With Text",
+		  "category": "07. others",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}

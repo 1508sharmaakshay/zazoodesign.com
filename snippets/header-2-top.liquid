@@ -1,0 +1,67 @@
+<!-- Header Top Start Here -->
+{% if section.settings.header_top_enable %}
+  <div class="header-top">
+    <div class="container">
+      <div class="col-sm-12">
+        <div class="row align-items-center justify-content-between">
+          <!-- Header Top Right Start -->
+          {% if settings.currency_enable %}
+          <div class="header-top-right">
+            <ul>
+              
+              {%- include 'currency-picker' -%}
+              
+            </ul>
+          </div>
+          {% endif %}
+          <!-- Header Top Right End -->
+          <!-- Logo Start -->
+          <div class="logo">
+            {%- include 'header-logo' -%}
+          </div>
+          <!-- Logo End -->
+          <!-- Cart Box Start Here -->
+          <div class="cart-box">
+            <ul>
+              {% if section.settings.enable_settings_menu %}
+              <li class="cart-box-right">
+                <a href="#">
+                  <span><i class="pe-7s-user"></i></span>
+                </a>
+                <!-- Dropdown Start -->
+                <ul class="ht-dropdown">
+                  {% assign account_menu = section.settings.account_menu_handle %}
+                  {% for link in linklists[account_menu].links %}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+                <!-- Dropdown End -->
+              </li>
+              {% endif %}
+              <!-- Search Box Start Here -->
+              {% if section.settings.enable_search %}
+              <li class="search_area__hd2">
+                <a href="#">
+                  <span class="pe-7s-search"></span>
+                </a>
+                <div class="categorie-search-box ht-dropdown">
+                  {% include 'search-bar' %}
+                </div>
+              </li>
+              {% endif %}
+              <!-- Categorie Search Box End Here -->
+              <li>
+                {%- include 'mini-cart' -%}
+              </li>
+            </ul>
+          </div>
+          <!-- Cart Box End Here -->
+        </div>
+      </div>
+    </div>
+    <!-- Container End -->
+  </div>
+{% endif %}
+<!-- Header Top End Here -->

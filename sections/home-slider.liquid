@@ -1,0 +1,563 @@
+<!-- Slider Area Start -->
+<div id="section-{{ section.id }}" class="main_slider">
+  <!--slider area start-->
+  <section class="slider_section slider_s_two">
+    <div class="slider_area owl-carousel">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'slide' %}
+      <div id="block-{{ block.id }}" class="single_slider d-flex align-items-center" data-bgimg="{% if block.settings.slider_bg_image %} {{ block.settings.slider_bg_image | img_url: 'master' }} {% else %} https://via.placeholder.com/1920x692   {% endif %}  ">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 {% if block.settings.justify_content == "start" %} justify-content-start {% elsif block.settings.justify_content == "center" %}  justify-content-center {% elsif block.settings.justify_content == "end" %} justify-content-end {% endif %}">
+              <div class="slider_content {% if block.settings.content_align == "left" %} text-left {% elsif block.settings.content_align == "right" %} text-right {% elsif block.settings.content_align == "center" %} text-center {% endif %}">
+                {% if block.settings.slider_titel1 !=blank %}
+                <h1 style="color: {{ block.settings.title_color }}; font-size:{{ block.settings.title_1_font_size }}px; {% if block.settings.fontwight_normal_t1 %} font-weight: normal; {% endif %}">{{ block.settings.slider_titel1 }}</h1>
+                {% endif %}
+                {% if block.settings.slider_titel2 !=blank %}
+                <h2 style="{% if block.settings.fontwight_normal_t2 %} font-weight: 400; {% endif %}   line-height: {{ block.settings.title_2_font_line_height }}px;   color: {{ block.settings.title_color2 }};font-size:{{ block.settings.title_2_font_size }}px;">{{ block.settings.slider_titel2 }}</h2>
+                {% endif %}
+                {% if block.settings.slider_content !=blank %}
+                <p style="color: {{ block.settings.content_color }};font-size:{{ block.settings.title_3_font_size }}px; line-height: {{ block.settings.title_3_font_line_height }}px;   ">{{ block.settings.slider_content }}</p>
+                {% endif %}
+                {% if block.settings.slider_bturl !=blank %}
+                <div style="" class="slide-btn small-btn">
+                  <a href="{{ block.settings.slider_bturl }}">{{ block.settings.slider_button }}</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <style>
+          #block-{{ block.id }} .small-btn a {
+            background: {{ block.settings.slide_caption_btn_bg_color }} !important;
+            color: {{ block.settings.slide_caption_btn_color }};  !important;
+          }
+          #block-{{ block.id }} .small-btn a:hover {
+            background: {{ block.settings.slide_caption_btn_bg_hover_color }} !important;
+            color: {{ block.settings.slide_caption_btn_hover_color }};  !important;
+          }
+        </style> 
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </section>
+  <!--slider area end-->
+</div>
+<!-- Slider Area End -->
+
+{% include 'section_typography' %}
+<style>
+  {% if  section.settings.slider_arrow_enable %}
+  .main_slider .owl-nav {
+    display: none;
+  }
+  {% endif %}
+  .main_slider  .owl-nav div {
+    color: {{ section.settings.rev_arrow_text_color  }};
+  }
+  .main_slider  .owl-nav div:hover {
+    color: {{ section.settings.rev_arrow_text_color_on_hover  }};
+  }
+  {% if  section.settings.slider_paginate_enable %}
+  .main_slider .owl-dots {
+    display: none;
+  }
+  {% endif %}
+  .main_slider .owl-dots .owl-dot {
+    background: {{ section.settings.rev_paginate_bg_color  }};
+  }
+  .main_slider .owl-dots .owl-dot.active {
+    background: {{ section.settings.rev_paginate_bg_color_on_active  }};
+  }
+  {% if  section.settings.slider_full_height %}
+  .slider-activation .fullscreen,.slider-activation .owl-stage-outer.owl-height {
+    height: 87vh !important;
+  }
+  /* Small and large mobile :320px. */
+  @media (max-width: 767px) {
+    .slider-activation .fullscreen, .slider-activation .owl-stage-outer.owl-height {
+      height: 50vh !important;
+    }
+  }
+  {% endif %}
+</style>
+
+
+
+<script>
+  /*----------------------------
+    5. Slider Activation
+    -----------------------------*/
+  $('#section-{{ section.id }} .slider_area').owlCarousel({
+    animateOut: 'fadeOut',
+    autoplay: true,
+    loop: true,
+    {% if settings.rtl_enable %}                
+    rtl: true,
+    {% endif %}
+    nav: true,
+    autoplay: false,
+    autoplayTimeout: 8000,
+    items: 1,
+    dots:true,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    });
+
+  /*---background image---*/
+  function dataBackgroundImage() {
+    $('[data-bgimg]').each(function () {
+      var bgImgUrl = $(this).data('bgimg');
+      $(this).css({
+        'background-image': 'url(' + bgImgUrl + ')', // + meaning concat
+      });
+    });
+  }
+  $(window).on('load', function () {
+    dataBackgroundImage();
+  });
+  </script>
+
+
+{% schema %}
+  {
+    "name": "Home Slider",
+    "settings": [
+		{
+			"type": "header",
+            "content": "Slider Arrow Style"
+        },
+		{
+               "type": "checkbox",
+               "id": "slider_arrow_enable",
+               "default": false,
+               "label": "Slider Arrow Disable"
+       	},
+        {
+          "type": "color",
+          "id": "rev_arrow_text_color",
+          "label": "Arrow Text Color",
+          "default": "#222"	
+        },
+        {
+          "type": "color",
+          "id": "rev_arrow_text_color_on_hover",
+          "label": "Arrow Text Color Hover",
+          "default": "#79a206"	
+        },
+		{
+			"type": "header",
+            "content": "Slider Paginate Style"
+        },
+		{
+               "type": "checkbox",
+               "id": "slider_paginate_enable",
+               "default": true,
+               "label": "Slider Paginate Disable"
+       	},
+        {
+          "type": "color",
+          "id": "rev_paginate_bg_color",
+          "label": "Paginate Bg Color",
+          "default": "#fff"	
+        },
+        {
+          "type": "color",
+          "id": "rev_paginate_bg_color_on_active",
+          "label": "Paginate Bg Color On Active",
+          "default": "#c7b270"	
+        }
+	],
+	"blocks":[
+		{
+          "type": "slide",
+          "name": "Slide",
+          "settings": [        
+			{
+              "type": "image_picker",
+              "id": "slider_bg_image",
+              "label": "Slider Image:",
+			  "info": "Recommended Size: 1920 x 692px"
+            },
+			{
+                "type":      "header",
+                "content":   "Justify Content" 
+            },
+			{
+                "type":  "radio",
+                "id":    "justify_content",
+                "label": "Justify Content",
+                "options": [
+                  { "value": "start", "label": "Start" },
+                  { "value": "center", "label": "Center" },
+				  { "value": "end", "label": "end" }
+                ],
+                "default":   "start"
+            },
+			{
+                "type":      "header",
+                "content":   "Content Alignment" 
+            },
+			{
+                "type":  "radio",
+                "id":    "content_align",
+                "label": "Content Alignment",
+                "options": [
+                  { "value": "left", "label": "Left" },
+                  { "value": "center", "label": "Center" },
+				  { "value": "right", "label": "Right" }
+                ],
+                "default":   "left"
+            },
+            {
+              "type": "textarea",
+              "id": "slider_titel1",
+              "label": "Slider Title #1",
+              "default": "AMAZING <br>  FROM Lukani"
+            },
+            {
+              "type": "textarea",
+              "id": "slider_titel2",
+              "label": "Slider Title #2",
+              "default": "cactus <br> <span>decoration</span>"
+            },
+            {
+              "type": "textarea",
+              "id": "slider_content",
+              "label": "Slider Content:",
+              "default": "Discount 20% Off For Lukani Members"
+            },
+            {
+              "type": "text",
+              "id": "slider_button",
+              "label": "Button Text:",
+              "default": "Discover Now"
+            },
+            {
+              "id": "slider_bturl",
+              "type": "url",
+              "label": "Button Link:"
+            },
+            {
+			  "type": "header",
+			  "content": "Slider Caption style"
+			},
+            {
+              "type": "color",
+              "id": "title_color",
+              "label": "Ttile Color #1",
+              "default": "#323232"
+            },
+            {
+              "type": "color",
+              "id": "title_color2",
+              "label": "Ttile Color #2",
+              "default": "#323232"
+            },
+            {
+              "type": "color",
+              "id": "content_color",
+              "label": "Content Color",
+              "default": "#323232"
+            },
+			{
+                "type": "paragraph",
+                "content": "- Slider Caption Button"
+            },
+			{
+                "type": "color",
+                "id": "slide_caption_btn_bg_color",
+                "label": "Caption Button Bg Color",
+                "default": "#222"	
+            },
+			{
+                "type": "color",
+                "id": "slide_caption_btn_color",
+                "label": "Caption Button Color",
+                "default": "#fff"	
+            },
+			{
+                "type": "color",
+                "id": "slide_caption_btn_bg_hover_color",
+                "label": "Caption Button Bg Hover Color",
+                "default": "#79a206"	
+            },
+			{
+                "type": "color",
+                "id": "slide_caption_btn_hover_color",
+                "label": "Caption Button Hover Color",
+                "default": "#fff"	
+            },
+            {
+			  "type": "header",
+			  "content": "Slider Caption Font style"
+			},
+			{
+			  "type": "range",
+			  "id": "title_1_font_size",
+			  "min": 0,
+			  "max": 100,
+			  "step": 1,
+			  "label": "Font Size Of Title #1 ",
+			  "unit": "px",
+			  "default": 16
+			},
+            {
+                   "type": "checkbox",
+                   "id": "fontwight_normal_t1",
+                   "default": false,
+                   "label": "Check this for Font Weight Normal"
+            },
+			{
+			  "type": "range",
+			  "id": "title_2_font_size",
+			  "min": 0,
+			  "max": 100,
+			  "step": 1,
+			  "label": "Font Size Of Title #2",
+			  "unit": "px",
+			  "default": 63
+			},
+            {
+                   "type": "checkbox",
+                   "id": "fontwight_normal_t2",
+                   "default": false,
+                   "label": "Check this for Font Weight Bold"
+            },
+			{
+			  "type": "range",
+			  "id": "title_2_font_line_height",
+			  "min": 0,
+			  "max": 100,
+			  "step": 1,
+			  "label": "Line Height Of Title #2",
+			  "unit": "px",
+			  "default": 63
+			},
+			{
+			  "type": "range",
+			  "id": "title_3_font_size",
+			  "min": 0,
+			  "max": 100,
+			  "step": 1,
+			  "label": "Font Size Of Content",
+			  "unit": "px",
+			  "default": 24
+			},
+			{
+			  "type": "range",
+			  "id": "title_3_font_line_height",
+			  "min": 0,
+			  "max": 100,
+			  "step": 1,
+			  "label": "Line Height Of Content",
+			  "unit": "px",
+			  "default": 24
+			}
+          ]
+       },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+
+	],
+	"presets": [
+		{
+		  "name": "Home Slider",
+		  "category": "01. Slider",
+		  "blocks":[
+				{
+					"type": "slide"
+				},
+				{
+					"type": "slide"
+				},
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

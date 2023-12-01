@@ -1,0 +1,89 @@
+<div class="categories_menu">
+  <div class="category-toggle-wrap">
+    {% if  section.settings.category_title !=blank %}
+    <div class="categories_title category-toggle ">
+      <h2 class="categori_toggle"> {{ section.settings.category_title }}</h2>
+    </div>
+    {% endif %}
+    <nav class="category-menu categories_menu_toggle">
+      <ul class="categories-list">
+        {% assign catetory_menu_handle = section.settings.catetory_menu %}
+        {% for link in linklists[catetory_menu_handle].links %}
+        {% assign child_list_handle = link.title | handleize %}
+        {% if linklists[child_list_handle].links != "" %}
+        <li class="menu-item-has-children open"><a href="{{ link.url }}">{{ link.title }}</a>
+          <ul class="category-mega-menu dropdown">
+            <!-- Mega-Menu Three Column Start -->
+            {% for childlink in linklists[child_list_handle].links %}
+            {% assign grand_childlist_handle = childlink.title | handleize %}
+            {% if linklists[grand_childlist_handle] and linklists[grand_childlist_handle].links.size > 0 %}
+            <li class="menu-item-has-children mega_class_add open">
+              <a href="{{ childlink.url }}" class="title">{{ childlink.title }}</a>
+              <ul class="dropdown">
+                {% for grand_childlist_handle in linklists[grand_childlist_handle].links %}
+                <li><a href="{{grand_childlist_handle.url}}">{{grand_childlist_handle.title}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %} 
+            <li><a href="{{ childlink.url }}" class="title">{{ childlink.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+            <!-- Mega-Menu Three Column End -->
+          </ul>
+          <!-- Vertical Mega-Menu End -->
+        </li>
+        {% else %} 
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+        <!-- More Categoies Start -->
+        <li class="side-show">
+          <a href="#"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle "></i>{{ section.settings.more_category_title }}</a>
+        </li>
+        <!-- More Categoies End -->
+      </ul>
+    </nav>
+    <script>
+      /* Hret disable */  
+      $('.side-show a').removeAttr('href');
+      /*-------------------------
+                        Create an account toggle function
+                     	 --------------------------*/
+      $( '.side-show' ).on('click', function() {
+        $( '.side-hide' ).slideToggle(300);
+      });	
+      /* Show hide Option */  
+      $( ".category-menu > ul > li:gt(4)" ).addClass( "side-hide" );
+      if ($('.side-show').hasClass("side-hide")) {
+        $('.side-show').removeClass('side-hide');
+      } 
+      $('.side-show').on('click', function(){
+        $(this).toggleClass('show-hide');
+      });
+      /* Mega Menu */	
+      $('.mega_class_add').parent('ul').addClass('megamenu');
+      //Mega menu
+      $('.megamenu').each(function(){
+        if($(this).children('li').length){
+          var ulChildren = $(this).children('li').length;
+          if (ulChildren == 5) {
+            $(this).addClass( "mega-menu-column-5" );
+          }else if (ulChildren == 4) {
+            $(this).addClass( "mega-menu-column-4" );
+          }else if(ulChildren == 3){
+            $(this).addClass( "mega-menu-column-3 mega-menu-column-4" );
+          }else if(ulChildren == 2){
+            $(this).addClass( "mega-menu-column-2  mega-menu-column-4" );
+          }else if(ulChildren == 1){
+            $(this).addClass( "mega-menu-column-4 mega-menu-column-1" );
+          }else {
+            $(this).addClass( "mega-menu-column-5 mega-full" );
+          }
+        }
+      });
+    </script>
+  </div>
+</div>
+
+

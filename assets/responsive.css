@@ -1,0 +1,44 @@
+/*=============== Extra Large(xl) Device ===============*/
+@media (min-width: 1200px) and (max-width: 1599px) {
+
+}
+
+/*=============== Large(LG) Device ===============*/
+@media (min-width: 992px) and (max-width: 1199px) {
+
+   
+
+}
+
+/*=============== Medium (md) Device ===============*/
+@media (min-width: 768px) and (max-width: 991px) {
+ 
+
+
+
+}
+
+/*=============== 0 to 991 ===============*/
+@media (max-width: 991px) {
+   
+}
+@media (max-width: 421px) {
+
+}
+
+/*=============== Small (sm) Device ===============*/
+@media (max-width: 767px) {
+   
+  
+}
+
+/*=============== Tablet Device ===============*/
+@media (max-width: 575px) {
+    
+}
+
+/*=============== Mobile Device ===============*/
+@media (max-width: 480px) {
+   
+
+}

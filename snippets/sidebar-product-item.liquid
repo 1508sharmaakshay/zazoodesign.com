@@ -1,0 +1,21 @@
+<!-- Single Product Start Here -->
+<div class="single-makali-product">
+  <div class="pro-img">
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+  </div>
+  <div class="pro-content">
+    <h4 class="pro-title"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+    <p>
+      <span class="price">{{ product.price | money }}</span>
+      {% if product.compare_at_price_max > product.price %}
+      <span class="prev-price">{{ product.compare_at_price | money }}</span>
+      {% endif %}  
+    </p>
+    <div class="rating">
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+    </div>
+  </div>
+</div>
+<!-- Single Product End Here -->

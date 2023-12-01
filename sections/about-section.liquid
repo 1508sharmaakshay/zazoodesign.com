@@ -1,0 +1,291 @@
+{% if section.settings.about_us_enable_area %}
+
+<!-- About Us Area Start -->
+<div id="section-{{ section.id }}" class="about_section">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    <div class="row {% if section.settings.floating_column %} flex-row-reverse{% endif %}">
+      <div class="col-12">
+        <figure>
+          {% if section.settings.about_img_hide %}
+          <div class="about_thumb">
+            <img src=" {% if section.settings.banner_img %} {{ section.settings.banner_img | img_url: '1024x1024' }}  {% else %}  https://via.placeholder.com/1170x900 {% endif %}" alt="{{ section.settings.banner_img.alt }}">
+          </div>
+          {% endif %}
+          <figcaption class="about_content">
+            {% if section.settings.about_title %}
+            <h1>{{ section.settings.about_title }}</h1>
+            {% endif %}
+
+            {% if section.settings.about_content %}
+            <p>{{ section.settings.about_content }}</p>
+            {% endif %}
+            
+            {% if section.settings.about_sign_hide %}
+            <div class="about_signature">
+              <img src=" {% if section.settings.sing_img %} {{ section.settings.sing_img | img_url: 'large' }}  {% else %}  https://via.placeholder.com/228x129 {% endif %}" alt="{{ section.settings.sing_img.alt }}">
+            </div>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </div>  
+    </div>
+  </div>
+</div>
+<!-- About Us Area End --> 
+
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Page About Us",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+    {
+      "type": "checkbox",
+      "id": "about_us_enable_area",
+      "label": "Enable Section",
+	  "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width ?",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Companny Image",
+      "info": "Recommended size 1770X900 px"
+    },
+    {
+      "type": "checkbox",
+      "id": "about_img_hide",
+      "label": "Enable Companny Image",
+	  "default": true
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About Title",
+      "default": "We are a digital agency focused on delivering content and utility user-experiences."
+    },
+    {
+      "type": "html",
+      "id": "about_content",
+      "label": "About Content ",
+      "default": "Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus. Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend feugiat lectus laoreet, vel nunc taciti integer cras. Hac pede dis, praesent nibh ac dui mauris sit. Pellentesque mi, facilisi mauris, elit sociis leo sodales accumsan. Iaculis ac fringilla torquent lorem consectetuer, sociosqu phasellus risus urna aliquam, ornare."
+    },
+    {
+      "type": "image_picker",
+      "id": "sing_img",
+      "label": "Companny Signature",
+      "info": "Recommended size 228X129 px"
+    },
+    {
+      "type": "checkbox",
+      "id": "about_sign_hide",
+      "label": "Enable Signature",
+	  "default": true
+    }
+  ],
+  "blocks": [
+       {
+          "type": "section_margin",
+          "name": "Section Margin",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_padding",
+          "name": "Section Padding",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_background",
+          "name": "Section Background",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "section_bg_image",
+              "label": "BG Image"
+            },
+            {
+              "type": "color",
+              "id": "section_bg_color",
+              "label": "BG Color",
+              "default": "#ffffff"
+            }
+          ]
+       }
+  ],
+	"presets": [
+		{
+		  "name": "About Section",
+		  "category": "07. others"
+		}
+	]
+  }
+{% endschema %}
+
+{% include 'section_typography' %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

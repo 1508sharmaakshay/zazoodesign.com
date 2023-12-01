@@ -1,0 +1,363 @@
+{% if section.settings.brand_logo_enable %}
+<!-- Brand Activation Start Here -->
+<div class="brand-area" id="section-{{ section.id }}">
+  <div class="container">
+    <!-- Brand Logo Active Start Here -->
+    {% if section.settings.brand_style == 'brand_style_1' %}
+    <div class="brand-logo-active owl-carousel">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'brand_logo' %}
+      <div class="single-brand">
+        <a href="{{ block.settings.br_logo_url }}">
+          <img src="{% if block.settings.br_logo_img !=blank %}{{ block.settings.br_logo_img | img_url: 'grande' }} {% else %} https://via.placeholder.com/170x130 {% endif %}" alt="{{ block.settings.br_logo_img.alt }}">
+        </a>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+    <!-- Brand Logo Active End Here -->
+    {% elsif section.settings.brand_style == 'brand_style_2' %}
+    <div class="brand-logo-active owl-carousel bnd_style_2">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'brand_logo' %}
+      <div class="single-brand">
+        <a href="{{ block.settings.br_logo_url }}">
+          <img src="{% if block.settings.br_logo_img !=blank %}   {{ block.settings.br_logo_img | img_url: 'grande' }} {% else %} https://via.placeholder.com/170x130 {% endif %}" alt="{{ block.settings.br_logo_img.alt }}">
+        </a>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- Brand Activation End Here -->
+{% endif %}
+
+
+{% include 'section_typography' %}
+<style>
+
+
+  {% if section.settings.brand_style == 'brand_style_2' %}
+
+    .brand-logo-active.bnd_style_2 {
+      border-bottom-color: {{ section.settings.brand_logo_broder_bottom_color }};
+    }
+  .brand-logo-active.bnd_style_2 {
+    border-top-color: {{ section.settings.brand_logo_broder_top_color }};
+  }
+
+
+  {% endif %}
+  
+  
+  
+</style>
+
+
+<script>
+      $('.brand-logo-active').owlCarousel({
+        loop: true,
+        nav: true,
+        dots: false,
+        {% if settings.rtl_enable %}                
+        rtl: true,
+        {% endif %}
+        smartSpeed: 500,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+        margin: 20,
+        responsive: {
+            0: {
+                items: 2,
+                autoplay: true,
+                smartSpeed: 200
+            },
+            340: {
+                items: 3
+            },
+            480: {
+                items: 3
+            },
+            768: {
+                items: 5
+            },
+            992: {
+                items: 5
+            },
+            1200: {
+                items: 6
+            }
+        }
+    })
+  
+</script>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Brand Logo",
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "brand_logo_enable",
+          "label": "Show Brand Logo Section",
+          "default": true
+        },
+		{
+		  "type": "header",
+          "content": "Brand Logo"
+        },
+		{
+               "type":      "radio",
+               "id":        "brand_style",
+               "label":     "Brand Style",
+               "options": [
+                 { "value": "brand_style_1", "label": "Style One" },
+                 { "value": "brand_style_2", "label": "Style Two" }
+               ],
+               "default":   "brand_style_2"
+        },
+        {
+          "type": "color",
+          "id": "brand_logo_broder_top_color",
+          "label": "Brand area Broder top",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "brand_logo_broder_bottom_color",
+          "label": "Brand area Broder bottom",
+          "default": "#ffffff"
+        }
+
+
+
+
+
+	],
+
+	"blocks":[
+        {
+        	"type": "brand_logo",
+        	"name": "Brand Logo",
+        	"settings": [
+                {
+                  "type": "header",
+                  "content": "Brand Logo Add"
+                },
+				{
+					"type": "image_picker",
+                    "id": "br_logo_img",
+                    "label": "Brand Logo:",
+                    "info": "Image Size: 170px x 130px"	
+				},
+				{
+					"type": "url",
+                    "id": "br_logo_url",
+                    "label": "Brand Logo URL"
+				}
+        	]
+        },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Brand Logo",
+		  "category": "07. others",
+		  "blocks":[
+
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

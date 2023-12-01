@@ -1,0 +1,102 @@
+<!-- shop start -->
+<div class="list-collection main-shop-page ptb-90">
+  {% for collection in collections %}
+  {% unless collection.handle == 'frontpage' %}
+  {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title {% if section.settings.section_text_align == 'section_text_left' %}text-left{% elsif section.settings.section_text_align == 'section_text_center' %}text-center{% elsif section.settings.section_text_align == 'section_text_right' %}text-right{% endif %} mb-65">
+          <h2>{{ collection_title }}</h2>
+          <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ section.settings.more_title }} {{ collection_title }} &rsaquo;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      {% assign products_limit = section.settings.products_limit_handle %}
+      {% for product in collection.products limit:products_limit %}
+      {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+      <div class="col-lg-{{ section.settings.product_column }} col-sm-6 col-xs-12">
+        {% include 'product-grid-item' %}
+      </div>
+      {% endfor %}
+    </div>
+    {% unless forloop.last %}<hr class="mb-50">{% endunless %}
+  </div>
+  {% endunless %}
+  {% endfor %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "All Collection List",
+    "settings": [
+		{
+          "type": "select",
+          "id": "section_text_align",
+          "label": "Heading Text Align",
+		  "options":[
+				{
+					"label": "Left",
+					"value": "section_text_left"
+				},
+				{
+					"label": "Center",
+					"value": "section_text_center"
+				},
+				{
+					"label": "Right",
+					"value": "section_text_right"
+				}
+			],
+			"default": "section_text_center"
+      	},
+		{
+          "type": "select",
+          "id": "product_column",
+          "label": "Product Column",
+		  "options":[
+				{
+					"label": "2 Products",
+					"value": "6"
+				},
+				{
+					"label": "3 Products",
+					"value": "4"
+				},
+				{
+					"label": "4 Products",
+					"value": "3"
+				},
+				{
+					"label": "6 Products",
+					"value": "2"
+				}
+			],
+			"default": "3"
+      	},
+		{
+          "type": "text",
+          "id": "products_limit_handle",
+          "label": "Product Limit",
+		  "default": "4",
+		  "info": "How many products show on per collection"
+      	},
+		{
+          "type": "text",
+          "id": "more_title",
+          "label": "More Title",
+		  "default": "More"
+      	}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

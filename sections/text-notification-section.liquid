@@ -1,0 +1,350 @@
+<div class="slider_top_notification" id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="main_notification_text">
+          <p>
+            {%- if section.settings.feature_icon_type == "img_icon" -%}
+            <img  src="{%- if section.settings.feature_icon -%}{{ section.settings.feature_icon | img_url: 'master' }} {%- else -%} https://cdn.shopify.com/s/files/1/0060/0624/3426/files/policy-2.png?7288 {%- endif -%}">
+            {%- elsif section.settings.feature_icon_type == "font_icon" -%}
+            <i class="{{ section.settings.icon_name }}"></i>
+            {%- elsif section.settings.feature_icon_type == "none" -%}
+            {%- endif -%}
+            {{ section.settings.noti_text_handle }}
+            {% if section.settings.noti_btn_url !=blank  %}
+            <a class="noti_btn" href="{{ section.settings.noti_btn_url }}" target="_blank">{{ section.settings.noti_btn_text }}</a>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% include 'section_typography' %}
+<style>
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'notification_color' -%}
+
+  #section-{{ section.id }} .main_notification_text p,.slider_top_notification,.main_notification_text p i, #section-{{ section.id }} .noti_btn {
+    color: {{ block.settings.noti_color }}
+  }
+
+  #section-{{ section.id }} .noti_btn:hover {
+    color: {{ block.settings.noti_btn_hover_color }}
+  }
+  #section-{{ section.id }} .noti_btn  {
+    border-color: {{ block.settings.noti_btn_border_color }}
+  }
+  #section-{{ section.id }} .noti_btn:hover  {
+    border-color: {{ block.settings.noti_btn_border_color_hover }}
+  }
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+
+
+  {% endcase %}
+  {% endfor %}
+
+
+
+  
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Text Notification",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Notification Content"
+        },
+		{
+              "type":  "radio",
+              "id":    "feature_icon_type",
+              "label": "Icon Type",
+              "options": [
+                { "value": "img_icon", "label": "Image Icon" },
+                { "value": "font_icon", "label": "Font Icon" },
+				{ "value": "none", "label": "None" }
+              ],
+              "default":   "img_icon"
+        },
+        {
+			  "type": "image_picker",
+			  "id": "feature_icon",
+			  "label": "Icon"
+		},
+		{
+                "type": "text",
+                "id": "icon_name",
+                "label": "Icon Name",
+                "default": "ti-mobile",
+                "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons) And Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/) . FontAwesome Icon Use: fa fa-money  And Themify Icon Use: ti-mobile"
+        },
+		{
+          "type": "textarea",
+          "id": "noti_text_handle",
+          "label": "Notification Text",
+		  "default": "Overnight Domestic Shipping Starting At $87.99!"
+        },
+		{
+		  "type": "header",
+          "content": "Notification Button"
+        },
+        {
+          "type": "text",
+          "id": "noti_btn_text",
+          "label": "Notification Button Text",
+          "default": "View Details !"
+        },
+        {
+          "type": "url",
+          "id": "noti_btn_url",
+          "label": "Button URL"
+        }
+	],
+
+	"blocks":[
+	    {
+          "type": "notification_color",
+          "name": "Notification Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "header",
+			  "content": "Notification Style"
+			},
+			{
+			  "type": "color",
+			  "id": "noti_color",
+			  "label": "Notification Text Color",
+			  "default": "#fff"
+			},
+			{
+			  "type": "color",
+			  "id": "noti_btn_hover_color",
+			  "label": "Notification Button hover Text Color",
+			  "default": "#fff"
+			},
+			{
+			  "type": "color",
+			  "id": "noti_btn_border_color",
+			  "label": "Notification Button Border Color",
+			  "default": "#fff"
+			},
+			{
+			  "type": "color",
+			  "id": "noti_btn_border_color_hover",
+			  "label": "Notification Button Border Color On Hover",
+			  "default": "#fff"
+			}
+
+
+          ]
+        },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Text Notification",
+		  "category": "07. others",
+		  "blocks":[
+			]
+		}
+	]
+  }
+{% endschema %}
+
+

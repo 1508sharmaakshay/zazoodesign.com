@@ -1,0 +1,632 @@
+<div id="section-{{ section.id }}" class="footer_top   {% if section.settings.divider_top %}   section_broder_top_enable {% endif %} {%if  section.settings.divider_bottom %} section_broder_bottom_enable  {%endif%}">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'widget_app' %}
+      <div class="col-lg-4 col-md-5">
+        <div class="widgets_container widget_app">
+          <div class="footer_logo">
+            <a href="{{ block.settings.footer_logo_url }}">
+              <img src=" {% if block.settings.footer_logo %} {{ block.settings.footer_logo | img_url: 'large' }} {% else %}  https://cdn.shopify.com/s/files/1/0275/1027/6157/files/logo.png?v=1588134591   {% endif %}" alt="{{ block.settings.footer_logo.alt }}" class="img">
+            </a>
+          </div>
+          <div class="footer_text_info">
+            <p>A perfect blend of creativity, energy, communication, happiness and love.
+Let us arrange a smile for you. </p>
+          </div>
+          <div class="footer_social">
+            <ul>
+              {% if block.settings.social_icon_url1 != blank and block.settings.social_icon1 != blank  %}
+              <li><a href="{{ block.settings.social_icon_url1 }}"><i class="fa fa-{{ block.settings.social_icon1}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon2 != blank and block.settings.social_icon_url2 != blank  %}
+              <li><a href="{{ block.settings.social_icon_url2 }}"><i class="fa fa-{{ block.settings.social_icon2}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon3 != blank and block.settings.social_icon_url3 != blank %}
+              <li><a href="{{ block.settings.social_icon_url3 }}"><i class="fa fa-{{ block.settings.social_icon3}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon4 != blank and block.settings.social_icon_url4 != blank %}
+              <li><a href="{{ block.settings.social_icon_url4 }}"><i class="fa fa-{{ block.settings.social_icon4}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon5 != blank and block.settings.social_icon_url5 != blank %}
+              <li><a href="{{ block.settings.social_icon_url5 }}"><i class="fa fa-{{ block.settings.social_icon5}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon6 != blank and block.settings.social_icon_url6 != blank %}
+              <li><a href="{{ block.settings.social_icon_url6 }}"><i class="fa fa-{{ block.settings.social_icon6}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon7 != blank and block.settings.social_icon_url7 != blank %}
+              <li><a href="{{ block.settings.social_icon_url7 }}"><i class="fa fa-{{ block.settings.social_icon7}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+
+              {% if block.settings.social_icon8 != blank and block.settings.social_icon_url8 != blank %}
+              <li><a href="{{ block.settings.social_icon_url8 }}"><i class="fa fa-{{ block.settings.social_icon8}}" aria-hidden="true"></i></a></li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="footer_app">
+            <ul>
+              {% if block.settings.f_app1 %}
+              <li>            
+                <a href="{{ block.settings.f_app1_url }}">
+                  <img src=" {% if block.settings.f_app1 %} {{ block.settings.f_app1 | img_url: 'large' }} {% else %} https://cdn.shopify.com/s/files/1/0275/1027/6157/files/iapp.jpg?v=1588993387 {% endif %}" alt="{{ block.settings.f_app1.alt }}" class="img">
+                </a>
+              </li>
+              {% endif %}
+              {% if block.settings.f_app2 %}
+              <li>
+                <a href="{{ block.settings.f_app2_url }}">
+                  <img src=" {% if block.settings.f_app2 %} {{ block.settings.f_app2 | img_url: 'large' }} {% else %} https://cdn.shopify.com/s/files/1/0275/1027/6157/files/gapp.jpg?v=1588993386 {% endif %}" alt="{{ block.settings.f_app2.alt }}" class="img">
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% when 'footer_menu_widget' %}
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <div class="widgets_container widget_menu">
+          {% if block.settings.widget_title !=''  %}
+          <h3>{{ block.settings.widget_title }}</h3>
+          {% endif %}
+          <div class="footer_menu">
+            <ul>
+              {% assign footer_menu = block.settings.footer_menu_handle %}
+              {% for link in linklists[footer_menu].links %}
+              <li> <a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% include 'section_typography' %}
+<style>
+  #scrollUp {
+    background: {{ settings.scrolltop_bg_color }};
+    color: {{ settings.scrolltop_color }};
+    border-color: {{ settings.scrolltop_bg_color }}; 
+  }
+  #scrollUp:hover {
+    background: {{ settings.scrolltop_hover_bg_color }};
+    color: {{ settings.scrolltop_hover_color }};
+    border-color: {{ settings.scrolltop_hover_bg_color }}; 
+  }
+  .section_broder_top_enable {
+    border-top: 1px solid #ebebeb;
+  }
+  .section_broder_bottom_enable {
+    border-bottom: 1px solid #ebebeb;
+  }
+  .section_broder_top_enable {
+    border-color: {{ section.settings.footer_section_divider_color | color_modify: 'alpha', section.settings.footer_section_divider_color_opacity }};
+  }
+  .section_broder_bottom_enable {
+    border-color: {{ section.settings.footer_section_divider_color | color_modify: 'alpha', section.settings.footer_section_divider_color_opacity }};
+  }
+
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'footer_content_color' -%}
+
+  #section-{{ section.id }}{
+    background-color: {{ block.settings.footer_section_bg_color }};
+  }
+  #section-{{ section.id }} .footer_widgetnav_menu ul li a,  #section-{{ section.id }} .footer_menu ul li, #section-{{ section.id }}  .footer_menu ul li a,#section-{{ section.id }}.footer_top p {
+    color: {{ block.settings.footer_section_content_color }};
+  }
+  #section-{{ section.id }} .widgets_container h3{
+    color: {{ block.settings.footer_section_title_color }};
+  }
+  #section-{{ section.id }} .widgets_container h3::before {
+    background: {{ block.settings.footer_section_title_color }};
+  } 
+  #section-{{ section.id }} .footer_menu ul li a:hover, #section-{{ section.id }} .footer_widgetnav_menu ul li a:hover{
+    color: {{ block.settings.footer_section_hover_color }}!important;
+  }
+  #section-{{ section.id }} .footer_social ul li a {
+    background: {{ block.settings.icon_bg_color }};
+  } 
+  #section-{{ section.id }} .footer_social ul li a{
+    color: {{ block.settings.icon_color }};
+  }
+
+  #section-{{ section.id }} .footer_social ul li:hover a {
+    background: {{ block.settings.icon_bg_color_on_hover }};
+  } 
+  #section-{{ section.id }} .footer_social ul li:hover a{
+    color: {{ block.settings.icon_color_on_hover }};
+  }
+  {% endcase %}
+  {% endfor %}
+  
+
+</style>
+
+
+{% schema %}
+  {
+    "name": "Footer Section",
+    "settings": [
+        {
+          "type": "header",
+          "content": "Section Divider"
+        },
+		{
+               "type": "checkbox",
+               "id": "divider_top",
+               "default": true,
+               "label": "Divider Top Enable"
+       	},
+		{
+               "type": "checkbox",
+               "id": "divider_bottom",
+               "default": true,
+               "label": "Divider Bottom Enable"
+       	},
+        {
+          "type": "color",
+          "id": "footer_section_divider_color",
+          "label": "Footer Divider Color",
+          "default": "#323232"
+        },
+        {
+          "type": "range",
+          "id": "footer_section_divider_color_opacity",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "label": "Divider Color Opacity",
+          "default": 0.5
+        }
+    ],
+	"blocks":[
+	   {
+          "type": "store_opening_info",
+          "name": "Store Opening Info",
+          "settings": [
+              {
+                "type": "text",
+                "id": "widget_title",
+                "label": "Widget Title"
+              },
+              {
+                "type": "textarea",
+                "id": "opening_info",
+                "label": "Opening Info",
+                "default": "<p><span>Mon - Fri:</span> 8AM - 10PM</p>"
+              }
+          ]
+       },
+	   {
+          "type": "footer_menu_widget",
+          "name": "Footer Menu",
+          "settings": [
+            {
+              "type": "text",
+              "id": "widget_title",
+              "label": "Widget Title"
+            },
+            {
+			  "type": "link_list",
+			  "id": "footer_menu_handle",
+			  "label": "Select Menu"
+			}
+
+          ]
+       },
+	   {
+          "type": "widget_app",
+          "name": "Widget App",
+          "settings": [
+
+                {
+                  "type": "image_picker",
+                  "id": "footer_logo",
+                  "label": "Footer Logo:",
+                  "info": "Recommended Size: 123px x 28px"
+                },
+                {
+                    "type": "url",
+                    "id": "footer_logo_url",
+                    "label": "Logo URL"
+                },
+                {
+                    "type": "header",
+                    "content": "Social Icon:"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon1",
+                    "label": "Social icon #1",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url1",
+                    "label": "Social Icon URL #1"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon2",
+                    "label": "Social icon #2",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url2",
+                    "label": "Social Icon URL #2"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon3",
+                    "label": "Social icon #3",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url3",
+                    "label": "Social Icon URL #3"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon4",
+                    "label": "Social icon #4",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url4",
+                    "label": "Social Icon URL #4"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon5",
+                    "label": "Social icon #5",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url5",
+                    "label": "Social Icon URL #5"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon6",
+                    "label": "Social icon #6",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url6",
+                    "label": "Social Icon URL #6"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon7",
+                    "label": "Social icon #7",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url7",
+                    "label": "Social Icon URL #7"
+
+                },
+                {
+                    "type": "text",
+                    "id": "social_icon8",
+                    "label": "Social icon #8",
+                    "info": "See icon [here](https://fontawesome.com/v4.7.0/icons/)",
+                    "placeholder": "Use only Icon Name"
+
+                },
+                {
+                    "type": "url",
+                    "id": "social_icon_url8",
+                    "label": "Social Icon URL #8"
+
+                },
+                {
+                    "type": "header",
+                    "content": "App Image And Link"
+
+                },
+                {
+                  "type": "image_picker",
+                  "id": "f_app1",
+                  "label": "App Store Logo #1:",
+                  "info": "Recommended Size: 165px x 50px"
+                },
+                {
+                    "type": "url",
+                    "id": "f_app1_url",
+                    "label": "App Store Logo URL"
+                },
+                {
+                  "type": "image_picker",
+                  "id": "f_app2",
+                  "label": "App Store Logo #2",
+                  "info": "Recommended Size: 165px x 50px"
+                },
+                {
+                    "type": "url",
+                    "id": "f_app2_url",
+                    "label": "App Store Logo URL"
+                }
+          ]
+       },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        },
+	    {
+          "type": "footer_content_color",
+          "name": "Footer Content Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "color",
+			  "id": "footer_section_bg_color",
+			  "label": "Footer Section BG Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "color",
+			  "id": "footer_section_content_color",
+			  "label": "Footer Section Content Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "color",
+			  "id": "footer_section_title_color",
+			  "label": "Footer Section Title Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "color",
+			  "id": "footer_section_hover_color",
+			  "label": "Footer Section Hover Color",
+			  "default": "#c1b17e"
+			},
+			{
+			  "type": "header",
+			  "content": "Footer Social Color"
+			},
+			{
+			  "type": "color",
+			  "id": "icon_bg_color",
+			  "label": "Social Icon BG Color",
+			  "default": "#f2f2f2"
+			},
+			{
+			  "type": "color",
+			  "id": "icon_color",
+			  "label": "Social Icon Color",
+			  "default": "#222222"
+			},
+			{
+			  "type": "color",
+			  "id": "icon_bg_color_on_hover",
+			  "label": "Social Icon BG Color On Hover",
+			  "default": "#79a206"
+			},
+			{
+			  "type": "color",
+			  "id": "icon_color_on_hover",
+			  "label": "Social Icon Color On Hover",
+			  "default": "#fff"
+			}
+          ]
+       }
+	]
+  }
+
+{% endschema %}

@@ -1,0 +1,71 @@
+<!-- Header Top Start Here -->
+<div  id="section-{{ section.id }}"  class="header-top">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-lg-5  col-md-5">
+        <!-- Header Top Left Start -->
+        <div class="header-top-left">
+          <ul>
+            {% if section.settings.contact_id_1 != '' %}
+            <li>
+              <a href="{{section.settings.contact_url_1}}">
+                {% if section.settings.contact_icon_1 != '' %}
+                <i class="fa fa-{{ section.settings.contact_icon_1 }}"></i> 
+                {% endif %}
+                {{ section.settings.contact_id_1 }}
+              </a>
+            </li>
+            {% endif %}
+
+            {% if section.settings.contact_id_2 != '' %}
+            <li>
+              <a href="{{section.settings.contact_url_2}}">
+                {% if section.settings.contact_icon_2 != '' %}
+                <i class="fa fa-{{ section.settings.contact_icon_2 }}"></i> 
+                {% endif %}
+                {{ section.settings.contact_id_2 }}</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <!-- Header Top Left End -->
+      </div>
+      <div class="col-lg-2  col-md-3">
+        <!-- Logo Start Here -->
+        <div class="logo text-center">
+          {%- include 'header-logo' -%}
+        </div>
+        <!-- Logo End Here -->
+      </div>
+      <div class="col-lg-5  col-md-4">
+        <!-- Header Top Right Start -->
+        <div class="header-top-right float-lg-right">
+          <ul>
+            <li>
+              <a href="#">{{ section.settings.set_menu_title }}
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <!-- Dropdown Start -->
+              <ul class="ht-dropdown">
+                {% assign account_menu = section.settings.account_menu_handle %}
+                {% for link in linklists[account_menu].links %}
+                <li>
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              <!-- Dropdown End -->
+            </li>
+            {% if settings.currency_enable %}
+            {%- include 'currency-picker' -%}
+            {% endif %}
+
+          </ul>
+        </div>
+        <!-- Header Top Right End -->
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</div>
+<!-- Header Top End Here -->

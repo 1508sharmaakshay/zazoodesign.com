@@ -1,0 +1,26 @@
+<div class="contact-address-area">
+  {% if section.settings.contact_info_title != '' %}
+  <h2 class="contact__title">{{ section.settings.contact_info_title }}</h2>
+  {% endif %}
+  {% if section.settings.contact_info_content != '' %}
+  <p>{{ section.settings.contact_info_content }}</p>
+  {% endif %}
+  <ul>
+    {% if section.settings.address_field_enable %}
+    <li>
+      <i class="fa fa-fax">&nbsp;</i> {% if section.settings.address_title %} {{ section.settings.address_title }} : {% endif %} {{ section.settings.address_content }} 
+    </li>
+    {% endif %}
+    {% if section.settings.phone_field_enable %}
+    <li>
+      <i class="fa fa-phone">&nbsp;</i> {% if section.settings.phone_number_title %} {{ section.settings.phone_number_title }} : {% endif %}  {{ section.settings.phone_number_content }}
+    </li>
+    {% endif %}
+    {% if section.settings.email_field_enable %}
+    <li>
+      <i class="fa fa-envelope">&nbsp;</i> {% if section.settings.email_title %} {{ section.settings.email_title }} : {% endif %} {{ section.settings.email_content }}
+    </li>
+    {% endif %}
+  </ul>
+</div>
+

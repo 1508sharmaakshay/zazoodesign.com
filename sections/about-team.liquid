@@ -1,0 +1,514 @@
+{% if section.settings.team_enable_area %}
+
+<div id="section-{{ section.id }}" class="our-team dark-white-bg ptb-90">
+  <div class="container{% if section.settings.full_width %}-fluid{% endif %}">
+    
+    <div class="row">
+      <div class="col-12">
+        {%- if section.settings.section_title_enable -%}
+        <div class="section_title {% if section.settings.text_align == "left" %}text-left {% elsif section.settings.text_align == "right" %} text-right {% elsif section.settings.text_align == "center" %} text-center {% endif %}">
+          {% if section.settings.section_title != blank %}
+          <h2>{{ section.settings.section_title }}</h2>
+          {% endif %}
+          {% if section.settings.section_title_paragraph != blank %}
+          <p class="subtitle">{{ section.settings.section_title_paragraph }}</p>
+          {% endif %}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+    
+    <div class="row text-center {% if section.settings.floating_column %} flex-row-reverse{% endif %}">
+      <!-- Single Team Start Here -->
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'team' -%}   
+      {% if block.settings.team_column == '3' %}
+      <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+       {% else %}
+       <div class="col-lg-4 col-md-6 col-sm-6 col-6"> 
+       {% endif %}
+        
+        <div class="single-team mb-all-30">
+          <div class="team-img sidebar-img sidebar-banner">
+
+            {% if block.settings.team_image %}
+            <a href="#">
+              <img src="{{ block.settings.team_image | img_url: 'large' }}" alt="team">
+            </a>
+            {% else %}
+            <img src="https://via.placeholder.com/250x310" alt="team">
+            {% endif %}            
+            
+            <div class="team-link">
+              <ul>
+                {% if block.settings.team_facebook_link %}
+                <li><a href="{{ block.settings.team_facebook_link }}"><i class="fa fa-facebook"></i></a></li>
+                {% endif %}
+                
+                {% if block.settings.team_twitter_link %}
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                {% endif %}
+                
+                {% if block.settings.team_linkedin_link %}
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                {% endif %}
+                
+              </ul>
+            </div>
+            
+          </div>
+          <div class="team-info">
+            {% if block.settings.team_name %}
+            <h4>{{ block.settings.team_name }}</h4>
+            {% endif %}
+            
+            {% if block.settings.team_skill %}
+            <p>{{ block.settings.team_skill }}</p>
+            {% endif %}            
+
+            
+          </div>
+        </div>
+      </div>
+      {%- endcase -%}
+      {%- endfor -%}  
+      
+      <!-- Single Team End Here -->
+    </div>
+    
+  </div>
+</div>
+
+
+{% endif %}
+
+
+
+
+{% schema %}
+  {
+    "name": "Team",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "team_enable_area",
+        "label": "Enable Section",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width ?",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "floating_column",
+        "label": "Floating Column ?",
+        "default": false
+      },
+		{
+          "type": "header",
+          "content": "Section Title"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_title_enable",
+          "label": "Section Title Enable",
+		  "default": true
+        }, 
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title Label",
+		  "default": "Flower Experts"
+        },
+		{
+          "type": "textarea",
+          "id": "section_title_paragraph",
+          "label": "Section Title Description"
+        },
+		{
+          "type":  "radio",
+          "id":    "text_align",
+          "label": "Section Title Align",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" },
+			 { "value": "center", "label": "Center" }
+          ],
+          "default":   "center"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Style"
+        },
+        {
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#323232"
+        },
+        {
+          "type": "color",
+          "id": "section_desc_color",
+          "label": "Section Description Color",
+          "default": "#323232"
+        },
+        {
+          "type": "color",
+          "id": "section_border_color",
+          "label": "Section Border Color",
+          "default": "#222"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Margin And Padding Bottom"
+        },
+        {
+          "type": "range",
+          "id": "section_title_margin_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Margin Bottom",
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "section_title_padding_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Padding Bottom",
+          "unit": "px",
+          "default": 40
+        }
+
+  ],
+  "blocks": [
+       {
+          "type": "team",
+          "name": "Add Team",
+          "settings": [
+            {
+              "type": "header",
+              "content": "Team"
+            },
+            {
+              "type": "image_picker",
+              "id": "team_image",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "team_name",
+              "label": "Name",
+              "default": "Marcos Alonso"
+            },
+            {
+              "type": "text",
+              "id": "team_skill",
+              "label": "Team Skill",
+              "default": "Web Designer"
+            },
+            {
+              "type": "url",
+              "id": "team_facebook_link",
+              "label": "Team Facebook Link"
+            },
+            {
+              "type": "url",
+              "id": "team_twitter_link",
+              "label": "Team Twitter Link"
+            },
+            {
+              "type": "url",
+              "id": "team_linkedin_link",
+              "label": "Team Linkedin Link"
+            },
+            {
+               "type":      "select",
+               "id":        "team_column",
+               "label":     "Team Column",
+               "options": [
+                 {
+                   "value": "3",
+                   "label": "4 Column"
+                 },
+                 {
+                   "value": "",
+                   "label": "3 Column"
+                 }
+               ],
+               "default":   "3",
+               "info":      "Text"
+            }
+          ]
+       },
+       {
+          "type": "section_margin",
+          "name": "Section Margin",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_padding",
+          "name": "Section Padding",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_md",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+       },
+       {
+          "type": "section_background",
+          "name": "Section Background",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "section_bg_image",
+              "label": "BG Image"
+            },
+            {
+              "type": "color",
+              "id": "section_bg_color",
+              "label": "BG Color",
+              "default": "#ffffff"
+            }
+          ]
+       }
+  ],
+	"presets": [
+		{
+		  "name": "Team",
+		  "category": "07. others"
+		}
+	]
+  }
+{% endschema %}
+
+<style>
+ 
+  #section-{{ section.id }} .section_title h2 {
+    color: {{ section.settings.section_title_color }};
+  }
+  #section-{{ section.id }} .section_title p {
+    color: {{ section.settings.section_desc_color }};
+  }
+  #section-{{ section.id }} .section_title::before{
+    background: {{ section.settings.section_border_color }};
+  }
+
+  #section-{{ section.id }}  .section_title {
+    padding-bottom:{{ section.settings.section_title_margin_bottom }}px;
+  }
+  #section-{{ section.id }}  .section_title {
+    margin-bottom: {{ section.settings.section_title_padding_bottom }}px;
+  }
+  
+  
+
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }  
+  
+  
+</style>
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

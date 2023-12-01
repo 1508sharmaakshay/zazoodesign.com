@@ -1,0 +1,375 @@
+<!--banner area start-->
+<div class="banner_area" id="section-{{ section.id }}">
+  <div  class="{%- if section.settings.banner_fluid == true -%}  container-fluid {%-else-%} container {%-endif-%}">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'banner' %}
+      <div class="col-lg-{{ block.settings.banner_column }} col-md-{{ block.settings.banner_column_md }}">
+        <figure class="single_banner">
+          <div class="banner_thumb">
+            <a href="{{ block.settings.banner_img_url }}">
+              <img src="{% if block.settings.banner_img %} {{ block.settings.banner_img | img_url: 'master' }} {% else %}https://via.placeholder.com/570x300 {% endif %}" alt="{{ block.settings.banner_img.alt }}">
+            </a>
+            {% if block.settings.banner_content_enable %}
+            <div class="banner_content">
+              {% if block.settings.sub_title !=blank %}
+              <h3>{{ block.settings.sub_title }}</h3>
+              {% endif %}
+              {% if block.settings.main_title !=blank %}
+              <h2>{{ block.settings.main_title }}</h2>
+              {% endif %}
+              {% if block.settings.shopnow_btn_text !=blank %}
+              <a href="{{ block.settings.banner_img_url }}"> {{  block.settings.shopnow_btn_text }} </a>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </figure>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!--banner area end-->
+
+{% include 'section_typography' %}
+<style>
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'prd_bnr_color' -%}
+  #section-{{ section.id }} .banner_content h3 {
+    color: {{ block.settings.sub_title_color }}
+  }
+  #section-{{ section.id }} .banner_content h2 {
+    color: {{ block.settings.main_title_color }}
+  }
+  #section-{{ section.id }} .banner_content a {
+    color: {{ block.settings.shop_now_color }}
+  }
+  #section-{{ section.id }} .banner_content a:hover {
+    color: {{ block.settings.shop_now_color_hover }}
+  }
+  #section-{{ section.id }} .banner_content a {
+    border-color: {{ block.settings.shop_now_bdr_color }}
+  }
+  {% endcase %}
+  {% endfor %}
+</style> 
+
+{% schema %}
+  {
+    "name": "Product Banner",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Product Banner"
+        },
+		{
+               "type": "checkbox",
+               "id": "banner_fluid",
+               "default": true,
+               "label": "Banner Fluid Enable"
+       	}
+    ],
+	"blocks":[
+		{
+          "type": "banner",
+          "name": "Product Banner",
+          "settings": [
+			{
+              "type": "image_picker",
+              "id": "banner_img",
+              "label": "Banner Image:"
+            },
+			{
+				"type": "url",
+				"id": "banner_img_url",
+				"label": "Banner URL / Shop Now URL"
+				
+			},
+			{
+			  "type": "range",
+			  "id": "banner_column",
+			  "min": 1,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Banner Column",
+			  "unit": "/12",
+			  "default": 6
+			},
+
+			{
+			  "type": "range",
+			  "id": "banner_column_md",
+			  "min": 1,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Tablate Banner Column",
+			  "unit": "/12",
+			  "default": 6
+			},
+            {
+                   "type": "checkbox",
+                   "id": "banner_content_enable",
+                   "default": true,
+                   "label": "Banner Content Enable"
+            },
+			{
+				"type": "textarea",
+				"id": "sub_title",
+				"label": "Sub Titel",
+				"default": "Big Sale Products"
+                
+			},
+			{
+				"type": "textarea",
+				"id": "main_title",
+				"label": "Main Title",
+				"default": "Plants <br> For Interior"
+			},
+			{
+				"type": "text",
+				"id": "shopnow_btn_text",
+				"label": "Shop Now Text",
+				"default": "Shop Now"
+			}
+			]
+		},
+	    {
+          "type": "prd_bnr_color",
+          "name": "Banner Content Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "color",
+			  "id": "sub_title_color",
+			  "label": "Sub Title Color",
+			  "default": "#222"
+			},
+			{
+			  "type": "color",
+			  "id": "main_title_color",
+			  "label": "Main Title Color",
+			  "default": "#222"
+			},
+			{
+			  "type": "color",
+			  "id": "shop_now_color",
+			  "label": "Shop Now Color",
+			  "default": "#222"
+			},
+			{
+			  "type": "color",
+			  "id": "shop_now_color_hover",
+			  "label": "Shop Now Color On Hover",
+			  "default": "#79a206"
+			},
+			{
+			  "type": "color",
+			  "id": "shop_now_bdr_color",
+			  "label": "Shop Now Border Bottom Color",
+			  "default": "#79a206"
+			}
+          ]
+        },
+	    {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+      }
+	],
+	"presets": [
+		{
+		  "name": "Product Banner",
+		  "category": "02. Banner",
+		  "blocks":[
+
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+
+
+

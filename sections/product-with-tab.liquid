@@ -1,0 +1,694 @@
+<!--Our Product Area Start-->
+<div class="our-product popular-products ptb-90" id="section-{{ section.id }}">
+  <div class="{% if section.settings.container_width == 'container' %} container {% elsif section.settings.container_width == 'fluid' %} container-fluid {% endif %}">
+    <!-- Section Title Start -->
+    {%- if section.settings.section_title_enable -%}
+    <div class="section_title {% if section.settings.text_align == "left" %}text-left {% elsif section.settings.text_align == "right" %} text-right {% elsif section.settings.text_align == "center" %} text-center {% endif %}">
+      {% if section.settings.section_title != blank %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+      {% if section.settings.section_title_paragraph != blank %}
+      <p class="subtitle">{{ section.settings.section_title_paragraph }}</p>
+      {% endif %}
+    </div>
+    {%- endif -%}
+    <div class="main-product-tab-area product_tab_btn">
+      <!--Section Title Start-->
+      <ul class="nav tabs-area pro-tabs-area">
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        {%- case block.type -%}
+        {%- when 'product_tab_carousel' -%}
+        {%- assign tab_product = collections[block.settings.carousel_product_collection_handle] -%}
+        {%- if tab_product == empty -%}
+        <li> <a class="nav-item nav-link  {% if forloop.first == true %}active{% endif %}"  data-toggle="tab" href="#product-tab-{{ i }}" role="tab" aria-selected="{% if forloop.first == true %} true {% else %} false {% endif %}">Tab-{{ i }}</a> </li>
+        {%- assign i = i | plus: 1 -%}
+        {%- else -%}
+        <li> <a class="nav-item nav-link  {% if forloop.first == true %}active{% endif %}"  data-toggle="tab" href="#product-tab-{{ block.id }}-{{ tab_product.title | handle }}" role="tab" role="tab" aria-selected="{% if forloop.first == true %} true {% else %} false {% endif %}" >{{ tab_product.title }}</a> </li>
+        {%- endif -%}
+        {% endcase %}
+        {% endfor %}
+      </ul>
+      <!--Section Title End-->
+
+      <!--Our Product Tab Content Start-->
+      <div class="tab-content">
+        {%- assign i = 1 -%}
+        {% for block in section.blocks %}
+        {%- case block.type -%}
+        {%- when 'product_tab_carousel' -%}
+        {%- assign tab_product = collections[block.settings.carousel_product_collection_handle] -%}
+        {%- assign product_limit = block.settings.product_limit_handle -%}
+        {%- assign product_num = section.settings.featured_product_column -%}
+        {%- if tab_product == empty -%}
+        <div class="tab-pane fade {% if forloop.first == true %} show active{% endif %}" id="product-tab-{{ i }}">
+          <div class="row">
+            <div class="our-pro-active owl-carousel">
+              {% for i in (1..product_limit) %}
+              {% capture a %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+              {%- if product_num == 1 -%}
+              <div class="col-12">
+              {% include 'product-grid-item-blank' %}
+              </div>
+              {%- else -%}
+              {%- assign modulo = forloop.index | modulo: product_num -%}
+              {%- if modulo == 1 -%}
+              <div class="dual-pro col-12">
+                {%- endif -%}
+                {% include 'product-grid-item-blank' %}
+                {%- if modulo == 0 or forloop.last -%}
+              </div>
+              {%- endif -%}
+              {%- endif -%} 
+              {% if a == 5 %}
+              {% assign a = 1 %}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {%- assign i = i | plus: 1 -%}
+        {%- else -%}
+        <div class="tab-pane fade {% if forloop.first == true %}show active{% endif %}" id="product-tab-{{ block.id }}-{{ tab_product.title | handle }}">
+          <div class="row">
+            <div class="our-pro-active owl-carousel">
+              {% for product in tab_product.products  limit:product_limit_handle%}
+              {%- if product_num == 1 -%}
+              <div class="col-12">
+              {% include 'product-grid-item' %}
+              </div>
+              {%- else -%}
+              {%- assign modulo = forloop.index | modulo: product_num -%}
+              {%- if modulo == 1 -%}
+              <div class="dual-pro col-12">
+                {%- endif -%}
+                {% include 'product-grid-item' %}
+                {%- if modulo == 0 or forloop.last -%}
+              </div>
+              {%- endif -%}
+              {%- endif -%}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+        {% endcase %}
+        {% endfor %}
+      </div>
+      <!--Our Product Tab Content End-->
+    </div>
+  </div>
+</div>
+<!--Our Product Area End-->
+
+{% include 'section_typography' %}
+<style>
+  {% if  section.settings.slider_arrow_enable %}
+  .our-pro-active .owl-nav {
+    display: none;
+  }
+  {% endif %}
+  .our-pro-active  .owl-nav div {
+    background: {{ section.settings.rev_arrow_bg_color  }};
+    color: {{ section.settings.rev_arrow_text_color  }};
+  }
+  .our-pro-active  .owl-nav div:hover {
+    background: {{ section.settings.rev_arrow_bg_color_on_hover  }};
+    color: {{ section.settings.rev_arrow_text_color_on_hover  }};
+  }
+  #section-{{ section.id }} .section_title h2 {
+  	color: {{ section.settings.section_title_color }};
+  }
+  #section-{{ section.id }} .section_title p {
+  	color: {{ section.settings.section_desc_color }};
+  }
+  #section-{{ section.id }} .section_title::before{
+    background: {{ section.settings.section_border_color }};
+  }
+  
+  #section-{{ section.id }}  .section_title {
+    padding-bottom:{{ section.settings.section_title_margin_bottom }}px;
+  }
+  #section-{{ section.id }}  .section_title {
+    margin-bottom: {{ section.settings.section_title_padding_bottom }}px;
+  }
+  
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'product_content_color' -%}
+  #section-{{ section.id }} .pro-tabs-area li a:hover,  #section-{{ section.id }}  .pro-tabs-area li a.active,   #section-{{ section.id }}  .nav.tabs-area.pro-tabs-area.tabstyle_2 li a.active      {
+    border-color: {{ block.settings.tab_text_active_color }};
+    color: {{ block.settings.tab_border_active_color }};
+  }
+  #section-{{ section.id }} .pro-tabs-area li a{
+    border-color: {{ block.settings.tab_text_color }};
+    color: {{ block.settings.tab_border_color }};
+  }
+  #section-{{ section.id }} .product_content h4 {
+    color: {{ block.settings.product_title_color }}
+  }
+  #section-{{ section.id }} .add-to-cart button, #section-{{ section.id }}  .small-btn a::before, #section-{{ section.id }}  .add-to-cart::before  {
+    color: {{ block.settings.cart_action_button_color }};
+  }
+  #section-{{ section.id }} .action_links ul li a  {
+    color: {{ block.settings.action_button_color }};
+  }
+  
+  #section-{{ section.id }} .action_links ul li a:hover ,#section-{{ section.id }}  .add-to-cart:hover  {
+    color: {{ block.settings.action_button_color_hover }}!important;
+  }
+  
+  #section-{{ section.id }} .price_box span.current_price {
+    color: {{ block.settings.product_currenct_price_color }};
+  }
+  #section-{{ section.id }} .price_box span.old_price {
+    color: {{ block.settings.product_old_price_color }};
+  }
+  #section-{{ section.id }} .product_content .product_rating span i {
+    color: {{ block.settings.product_rating_color }};
+  }
+  
+  {% endcase %}
+  {% endfor %}
+</style>
+
+
+<script>
+/*------- 
+     featured-new-product 
+----------------------------------*/
+  {% assign product_column_tablet = section.settings.product_column_tablet %}
+  {% assign product_column_desktop = section.settings.product_column_desktop %}
+  {% assign product_column_large = section.settings.product_column_large %}
+  /*------- 
+    Bestseller Slider 2 Active
+----------------------------------*/
+  $('#section-{{ section.id }} .our-pro-active').owlCarousel({
+    loop: true,
+    nav: true,
+    dots: false,
+    smartSpeed: 1500,
+    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    margin: 0,
+    {%- if settings.rtl_enable %}rtl:true,{% endif -%}
+    responsive: {
+      0: {
+     	 items: 1
+      },
+      480: {
+      	items: 2
+      },
+      768: {
+     	 items: {{ product_column_tablet }}
+      },
+      1000: {
+      	items: {{ product_column_desktop }}
+      },
+      1200: {
+      	items: {{ product_column_large }}
+      }
+    }
+    });
+</script>  
+
+
+{% schema %}
+  {
+    "name": "Product Tab Carousel",
+    "settings": [
+		{
+          "type":  "radio",
+          "id":    "container_width",
+          "label": "Container Width",
+          "options": [
+            { "value": "container", "label": "Container" },
+            { "value": "fluid", "label": "Full Width" }
+          ],
+          "default":   "container"
+        },
+		{
+          "type": "header",
+          "content": "Section Title"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_title_enable",
+          "label": "Section Title Enable",
+		  "default": true
+        }, 
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title Label",
+		  "default": "Section Title"
+        },
+		{
+          "type": "textarea",
+          "id": "section_title_paragraph",
+          "label": "Section Title Description"
+        },
+		{
+          "type":  "radio",
+          "id":    "text_align",
+          "label": "Section Title Align", 
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" },
+			 { "value": "center", "label": "Center" }
+          ],
+          "default":   "center"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Style"
+        },
+        {
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#222"
+        },
+        {
+          "type": "color",
+          "id": "section_desc_color",
+          "label": "Section Description Color",
+          "default": "#222"
+        },
+        {
+          "type": "color",
+          "id": "section_border_color",
+          "label": "Section Border Color",
+          "default": "#222"
+        },
+        {
+          "type": "paragraph",
+          "content": "Section Title Margin And Padding Bottom"
+        },
+        {
+          "type": "range",
+          "id": "section_title_padding_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Margin Bottom",
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "section_title_margin_bottom",
+          "min": 0,
+          "max": 250,
+          "step": 5,
+          "label": "Padding Bottom",
+          "unit": "px",
+          "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Carousel Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Product Slider Arrow Style"
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_arrow_enable",
+        "default": false,
+        "label": "Slider Arrow Disable"
+      },
+      {
+        "type": "color",
+        "id": "rev_arrow_bg_color",
+        "label": "Arrow Bg Color",
+        "default": "rgba(0,0,0,0)"	
+      },
+      {
+        "type": "color",
+        "id": "rev_arrow_text_color",
+        "label": "Arrow Text Color",
+        "default": "#222"	
+      },
+      {
+        "type": "color",
+        "id": "rev_arrow_bg_color_on_hover",
+        "label": "Arrow Bg Color On Hover",
+        "default": "rgba(0,0,0,0)"	
+      },
+      {
+        "type": "color",
+        "id": "rev_arrow_text_color_on_hover",
+        "label": "Arrow Text Color Hover",
+        "default": "#79a206"	
+      },
+      {
+        "type": "range",
+        "id": "featured_product_column",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "label": "Product Row",
+        "unit": "Row",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "product_column_large",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Product Column / Large",
+        "unit": "Itm",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "product_column_desktop",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Product Column / Desktop",
+        "unit": "Itm",
+        "default": 3
+      },
+      {
+        "type": "range",
+        "id": "product_column_tablet",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "label": "Product Column / Tablet",
+        "unit": "Itm",
+        "default": 2
+      }
+
+
+
+  ],
+  "blocks": [
+       {
+          "type": "product_tab_carousel",
+          "name": "Product Tab Carousel",
+          "settings": [
+            {
+              "type": "header",
+              "content": "Product Settings"
+            },
+            {
+              "type" : "collection",
+              "id" : "carousel_product_collection_handle",
+              "label" : "Select Collection"        
+            },
+            {
+                "type": "range",
+                "id": "product_limit_handle",
+                "min": 2,
+                "max": 20,
+                "step": 1,
+                "label": "Product Limit",
+                "default": 4
+            }
+
+          ]
+       },
+	   {
+          "type": "product_content_color",
+          "name": "Product Tab Content Color",
+		  "limit": 1,
+          "settings": [
+			{
+			  "type": "header",
+			  "content": "Tab Style"
+			},
+			{
+			  "type": "color",
+			  "id": "tab_border_color",
+			  "label": "Tab Text Color",
+			  "default": "#222"
+			},
+            {
+               "type": "paragraph",
+               "content": "-Tab Hover and Active Style"
+            },
+			{
+			  "type": "color",
+			  "id": "tab_border_active_color",
+			  "label": "Tab Text Color On Hover and Active",
+			  "default": "#79a206"
+			},
+			{
+			  "type": "color",
+			  "id": "tab_text_active_color",
+			  "label": "Tab Border Color On Hover and Active",
+			  "default": "#79a206"
+			},
+			{
+			  "type": "header",
+			  "content": "Product Title"
+			},
+			{
+			  "type": "color",
+			  "id": "product_title_color",
+			  "label": "Product Title Color",
+			  "default": "#323232"
+			},
+			{
+			  "type": "header",
+			  "content": "Action Button"
+			},
+			 {
+			  "type": "color",
+			  "id": "action_button_color",
+			  "label": "Action Button Color",
+			  "default": "#222"
+			},
+			{
+			  "type": "color",
+			  "id": "action_button_color_hover",
+			  "label": "Action Button Color On Hover",
+			  "default": "#79a206"
+			},
+		    {
+			  "type": "header",
+			  "content": "Product Rating"
+			},
+			{
+			  "type": "color",
+			  "id": "product_rating_color",
+			  "label": "Product Rating Color",
+			  "default": "#FF9800"
+			},
+		    {
+			  "type": "header",
+			  "content": "Product Price"
+			},
+			{
+			  "type": "color",
+			  "id": "product_currenct_price_color",
+			  "label": "Current Pirce Color",
+			  "default": "#79a206"
+			},
+		    {
+			  "type": "color",
+			  "id": "product_old_price_color",
+			  "label": "Old Pirce Color",
+			  "default": "#222222"
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#1a1a1a"
+			}
+          ]
+        }
+  ],
+  "presets" : [
+    {
+      "name"    : "Product Tab Carousel",
+      "category": "03. Product"
+    }
+  ]
+  }
+{% endschema %}
+
+
+
+
+
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}
+

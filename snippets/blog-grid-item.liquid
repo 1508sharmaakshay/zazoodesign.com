@@ -1,0 +1,26 @@
+<article class="single_blog">
+  <figure>
+    <div class="blog_thumb">
+      {% if article.image %}
+      <a  href="{{ article.url }}">
+        {{ article | img_url: '1024x1024' | img_tag: article.title }}
+      </a>
+      {% endif %}
+    </div>
+    <figcaption class="blog_content">
+      <h4 class="post_title"><a href="{{ article.url }}">{{ article.title }}</a></h4>
+      <div class="blog_meta">
+        <p>{{ 'blogs.article.pby' | t }} <span>{{ article.author }}</span> / {{ 'blogs.article.pdate' | t  }} <span>{{ article.published_at | date: format: 'month_day_year' }}</span></p>
+      </div>
+      {% if article.excerpt.size > 0 %}
+      <p class="post_desc">{{ article.excerpt }}</p>
+      {% else %}
+      <p class="post_desc">{{ article.content | strip_html | truncate: 90 }}</p>
+      {% endif %}
+      <footer class="btn_more">
+        <a href="{{ article.url }}"> {{ 'blogs.article.read_more' | t }} </a>
+      </footer>
+    </figcaption>
+  </figure>
+</article>
+
