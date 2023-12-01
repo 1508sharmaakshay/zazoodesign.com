@@ -58,7 +58,6 @@
   </div>
 </div>
 <!--Our Product Area End-->
-
 {% include 'section_typography' %}
 <style>
   {% if  section.settings.slider_arrow_enable %}
@@ -83,10 +82,6 @@
   #section-{{ section.id }} .section_title::before{
     background: {{ section.settings.section_border_color }};
   }
-  
-  
-  
-  
   {% if section.settings.section_title_divder_img %}
   	#section-{{ section.id }}   .section-title {
    		 background: rgba(0, 0, 0, 0) url("{{ section.settings.section_title_divder_img | img_url: 'master' }}") no-repeat scroll 50% 100%;
@@ -96,14 +91,12 @@
     background: none;
   }
   {% endif %}
-  
   #section-{{ section.id }}  .section_title {
     padding-bottom:{{ section.settings.section_title_margin_bottom }}px;
   }
   #section-{{ section.id }}  .section_title {
     margin-bottom: {{ section.settings.section_title_padding_bottom }}px;
   }
-  
   {%- for block in section.blocks -%}
   {%- case block.type -%}
   {%- when 'product_content_color' -%}
@@ -124,11 +117,9 @@
   #section-{{ section.id }} .action_links ul li a  {
     color: {{ block.settings.action_button_color }};
   }
-  
   #section-{{ section.id }} .action_links ul li a:hover ,#section-{{ section.id }}  .add-to-cart:hover  {
     color: {{ block.settings.action_button_color_hover }}!important;
   }
-  
   #section-{{ section.id }} .price_box span.current_price {
     color: {{ block.settings.product_currenct_price_color }};
   }
@@ -138,20 +129,10 @@
   #section-{{ section.id }} .product_content .product_rating span i {
     color: {{ block.settings.product_rating_color }};
   }
-  
-  
-
-  
-  
-  
-  
   {% endcase %}
   {% endfor %}
 </style>
-
-
 <script>
-
     $('#section-{{ section.id }} .our-pro-active').owlCarousel({
         loop: true,
         nav: true,
@@ -181,11 +162,8 @@
       			items: {{section.settings.product_column}}
             }
         }
-    })
-
+    });
 </script>
-
-
 {% schema %}
   {
     "name": "Carousel Product",
@@ -659,36 +637,3 @@
   ]
   }
 {% endschema %}
-
-
-
-
-
-{% stylesheet %}
-{% endstylesheet %}
-{% javascript %}
-{% endjavascript %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

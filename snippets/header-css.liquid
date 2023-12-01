@@ -1,45 +1,45 @@
 <!-- Link all your CSS files below -->
-{{ 'font-awesome.min.css' | asset_url | stylesheet_tag }}
-{{ 'animate.css' | asset_url | stylesheet_tag }}
-{{ 'pe-icon-7-stroke.min.css' | asset_url | stylesheet_tag }}
-{{ 'themify-icons.css' | asset_url | stylesheet_tag }}
-{{ 'nice-select.css' | asset_url | stylesheet_tag }}
-{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
-{{ 'jquery-ui.min.css' | asset_url | stylesheet_tag }}
-{{ 'meanmenu.min.css' | asset_url | stylesheet_tag }}
-{{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
-{{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
-{{ 'default.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'font-awesome.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'animate.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'pe-icon-7-stroke.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'themify-icons.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'nice-select.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'jquery.fancybox.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'jquery-ui.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'meanmenu.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'owl.carousel.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'bootstrap.min.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'default.css' | asset_url }}">
 <!-- Fancybox CSS -->
-{{ 'jquery.fancybox-1.3.4.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'jquery.fancybox-1.3.4.css' | asset_url }}">
 
 {%- if settings.enable_preloader -%}
-{{ 'preloader.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'preloader.css' | asset_url }}">
 {% endif %}
 
 <!-- Link your style.css and responsive.css files below -->
-{{ 'style.css' | asset_url | stylesheet_tag }}
-{{ 'responsive.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'style.css' | asset_url }}">
+<link rel="stylesheet" data-href="{{ 'responsive.css' | asset_url }}">
 
 <!-- Theme Default CSS -->
-{{ 'theme-default.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-default.css' | asset_url }}">
 <!-- Make your theme CSS calls here -->
-{{ 'theme-custom.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-custom.css' | asset_url }}">
 
 {% if settings.rtl_enable %}
-{{ 'theme-rtl.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-rtl.css' | asset_url }}">
 {% endif %}
 <!-- Make your theme RTL CSS calls here -->
-{{ 'theme-responsive.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-responsive.css' | asset_url }}">
 {% if settings.rtl_enable %}
 <!-- Make your theme RTL CSS calls here -->
-{{ 'theme-responsive-rtl.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-responsive-rtl.css' | asset_url }}">
 {% endif %}
 
 <!-- Make all your dynamic CSS calls here -->
-{{ 'skin-theme.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'skin-theme.css' | asset_url }}">
 <!-- Call your theme color CSS here -->
-{{ 'theme-color.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" data-href="{{ 'theme-color.css' | asset_url }}">
 
 {%- if settings.custom_css != '' -%}
 

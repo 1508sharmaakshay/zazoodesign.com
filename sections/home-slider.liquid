@@ -6,7 +6,7 @@
       {% for block in section.blocks %}
       {% case block.type %}
       {% when 'slide' %}
-      <div id="block-{{ block.id }}" class="single_slider d-flex align-items-center" data-bgimg="{% if block.settings.slider_bg_image %} {{ block.settings.slider_bg_image | img_url: 'master' }} {% else %} https://via.placeholder.com/1920x692   {% endif %}  ">
+      <div id="block-{{ block.id }}" class="single_slider d-flex align-items-center lazybg" data-style="background-image: url({% if block.settings.slider_bg_image %} {{ block.settings.slider_bg_image | img_url: 'master' }} {% else %}://via.placeholder.com/1920x692{% endif %})">
         <div class="container">
           <div class="row">
             <div class="col-12 {% if block.settings.justify_content == "start" %} justify-content-start {% elsif block.settings.justify_content == "center" %}  justify-content-center {% elsif block.settings.justify_content == "end" %} justify-content-end {% endif %}">
@@ -555,9 +555,3 @@
 	]
   }
 {% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}

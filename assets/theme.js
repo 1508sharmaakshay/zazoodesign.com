@@ -1,7 +1,7 @@
 (function($) {
   "use strict";
 
-  jQuery(document).ready(function(){
+  setTimeout(function(){
 
     /*--------------------------
     1. Newsletter Popup
@@ -467,6 +467,7 @@
     $(window).on('load', function () {
       dataBackgroundImage();
     });
+    setTimeout(dataBackgroundImage);
 
     /*---stickey menu---*/
     $(window).on('scroll',function() {    

@@ -18,8 +18,8 @@
   <figure>
     <div class="product_thumb">
       <a class="primary_img" href="{{ product.url | within: collection }}">
-        <img class="popup_cart_image normal-image" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-        <img class="popup_cart_image hover-image" src="{{ product.images[1] | product_img_url: 'large' }}" alt="{{ product.images[1].alt | escape }}">
+        <img class="popup_cart_image normal-image lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" data-src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}">
+        <img class="popup_cart_image hover-image lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" data-src="{{ product.images[1] | product_img_url: 'master' }}" alt="{{ product.images[1].alt | escape }}">
       </a>
       {%- include 'product-badge' -%}
       <div class="action_links">

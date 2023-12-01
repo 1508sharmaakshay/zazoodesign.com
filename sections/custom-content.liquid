@@ -37,10 +37,10 @@
         <div class="image-content">
           {% if block.settings.image_content_image != blank and block.settings.image_content_image_url != blank %}
           <a href="{{ block.settings.image_content_image_url }}">
-            <img src="{{ block.settings.image_content_image | img_url: 'master' }}" alt="{{ block.settings.image_content_image.alt }}">
+            <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" data-src="{{ block.settings.image_content_image | img_url: 'master' }}" alt="{{ block.settings.image_content_image.alt }}">
           </a>
           {% elsif block.settings.image_content_image != blank %}
-          <img src="{{ block.settings.image_content_image | img_url: 'master' }}" alt="{{ block.settings.image_content_image.alt }}">
+          <img class="lazy2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=" data-src="{{ block.settings.image_content_image | img_url: 'master' }}" alt="{{ block.settings.image_content_image.alt }}">
           {% else %}
           {{ 'image' | placeholder_svg_tag: 'custom-svg-image' }}
           {% endif %}
